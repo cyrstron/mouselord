@@ -15,7 +15,7 @@
     "noImplicitAny": true,   
     "removeComments": true,  
     "preserveConstEnums": true,  
-    "outDir": "./dist",     
+    "outDir": "./.dist",     
     "jsx": "react",  
     "baseUrl": "./src",           
     "paths": {

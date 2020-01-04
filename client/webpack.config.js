@@ -3,6 +3,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = (env, argv) => {  
   const isDevelopment = argv.mode === 'development';
@@ -20,12 +21,12 @@ module.exports = (env, argv) => {
   ];
 
   const outputPath = isDevelopment ? 
-    path.join(__dirname, '/dist') : 
+    path.join(__dirname, '/.dist') : 
     path.join(__dirname, '../static/client');
 
   const filename = isDevelopment ?
     'bundle.min.js' :
-    'bundle-[hash].min.js';
+    'bundle.[hash].min.js';
 
   const publicPath = isDevelopment ?
     '/' :
@@ -63,28 +64,29 @@ module.exports = (env, argv) => {
           test: /\.scss$/,
           use: [
             ...cssLoaders,
-            { loader: 'sass-loader', options: { sourceMap: true } }
+            { loader: 'sass-loader', options: { sourceMap: isDevelopment } }
           ],
         },
-        {
+        isDevelopment && {
           test: /\.js\.map$/,
           use: "source-map-loader",
           enforce: "pre",
           include: path.join(__dirname, '/node_modules/@micelord')
         }
-      ]
+      ].filter((rule) => !!rule)
     },
     plugins: [
       new HtmlWebpackPlugin({
         template: './src/index.html'
       }),
       new MiniCssExtractPlugin({      
-        filename: "style.css",
-        chunkFilename: "[name].css"
+        filename: isDevelopment ? "style.css" : "style.[hash].css",
+        chunkFilename: isDevelopment ? "[name].css" : "[name].[hash].css",
       }),    
       new Dotenv({
         path: './.env',
-      })
+      }),
+      new CleanWebpackPlugin(),
     ],
     devServer: {
       port: 3000,
