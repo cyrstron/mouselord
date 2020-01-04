@@ -1,5 +1,5 @@
 import { observable, computed, action } from "mobx";
-import { GridParams, IndexatedFigure, GeoPolygon } from "@micelord/grider";
+import { GridParams, IndexatedFigure, GeoPolygon } from "@mouselord/grider";
 import { NewBorderStore } from "./new-border-store";
 import { GamePayload } from "@state/actions/games-requests/actions";
 

@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import {DomOverlay} from 'react-google-maps-ts';
-import {GeoPoint} from '@micelord/grider';
+import {GeoPoint} from '@mouselord/grider';
 
 interface Props {
   children?: ReactNode;

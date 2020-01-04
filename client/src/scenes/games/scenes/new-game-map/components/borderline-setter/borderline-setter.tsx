@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react';
 import { NewGameStore } from '@scenes/games/stores/new-game-store';
 import { EditableBorderline } from './editable-borderline';
 import { MapBroadcaster } from 'react-google-maps-ts';
-import { GeoPoint } from '@micelord/grider';
+import { GeoPoint } from '@mouselord/grider';
 
 export interface BorderlineSetterProps {
   newGameStore?: NewGameStore;

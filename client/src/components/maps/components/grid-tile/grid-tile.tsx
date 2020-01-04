@@ -4,7 +4,7 @@ import {
   TileMercPoint, 
   MapGridTile, 
   Point 
-} from '@micelord/grider';
+} from '@mouselord/grider';
 
 interface Props {
   params: GridParams;

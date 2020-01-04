@@ -7,7 +7,7 @@ import {
   GridParams, 
   MapGridTile, 
   Point
-} from '@micelord/grider';
+} from '@mouselord/grider';
 import { CacheService } from '@services/cache-service';
 
 interface Props {

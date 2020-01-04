@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { CurrentGameStore } from '@scenes/games/stores/current-game-store';
-import { Cell } from '@micelord/grider';
+import { Cell } from '@mouselord/grider';
 import { Polygon } from 'react-google-maps-ts';
 
 export interface CurrentObjectProps {

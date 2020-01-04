@@ -4,7 +4,7 @@ import { GridOverlay } from '@components/maps/components/grid-overlay/grid-overl
 import { Polyline, MapBroadcaster } from 'react-google-maps-ts';
 import { CurrentGameStore } from '@scenes/games/stores/current-game-store';
 import { CurrentObject } from './components/current-object';
-import { GeoPoint, Cell } from '@micelord/grider';
+import { GeoPoint, Cell } from '@mouselord/grider';
 import { SelectedObject } from './components/selected-object';
 
 interface CurrentGameMapProps {

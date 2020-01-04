@@ -1,6 +1,6 @@
 import {action, computed, observable} from 'mobx';
 import { GeolocationActions } from './geolocation.actions';
-import {GeoPoint} from '@micelord/grider';
+import {GeoPoint} from '@mouselord/grider';
 
 export interface GeolocationProps {
   geolocationStore?: GeolocationStore;

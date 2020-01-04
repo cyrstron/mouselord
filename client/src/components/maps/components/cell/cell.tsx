@@ -1,7 +1,7 @@
 import React from 'react';
 import {SvgOverlay} from '../svg-overlay/svg-overlay';
 import {Polygon} from 'react-google-maps-ts';
-import { Cell } from '@micelord/grider';
+import { Cell } from '@mouselord/grider';
 
 const CellPoly = ({
   onClick,

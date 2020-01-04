@@ -1,5 +1,5 @@
 import { GeoPointStore } from "./point-store";
-import { GeoPoint, Cell, Polygon, GeoPolygon, Figure, GridParams, IndexatedFigure } from "@micelord/grider";
+import { GeoPoint, Cell, Polygon, GeoPolygon, Figure, GridParams, IndexatedFigure } from "@mouselord/grider";
 import { observable, computed, action } from "mobx";
 import { InputsStore, FormField } from "@stores/inputs-store";
 import { NewGameStore } from "./new-game-store";

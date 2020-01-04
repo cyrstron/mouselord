@@ -6,7 +6,7 @@ import {
   GeoPolygon, 
   Cell, 
   GeoPoint 
-} from "@micelord/grider";
+} from "@mouselord/grider";
 
 class CurrentGameStore {
   @observable isReady = false;
