@@ -1,0 +1,3 @@
+[submodule "react-google-maps"]
+	path = react-google-maps
+	url = https://github.com/cyrstron/react-google-maps.git
