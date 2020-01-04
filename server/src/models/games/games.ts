@@ -1,5 +1,5 @@
 import { Db, Collection, ObjectID, Cursor} from "mongodb";
-import { GridParams, GeoPolygon, Figure } from "@micelord/grider";
+import { GridParams, GeoPolygon, Figure } from "@mouselord/grider";
 
 export interface GameSchema {
   name: string;
