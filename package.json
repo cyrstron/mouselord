@@ -16,7 +16,7 @@
     "links:client": "cd ./client && npm run links",
     "links:server": "cd ./server && npm run links",
     "links": "npm run links:server && npm run links:client",
-    "dev:init": "git submodule update --init && npm run link:dev && npm run links",
+    "dev:init": "npm i && git submodule update --init && npm run link:dev && npm run links",
     "postinstall": "npm run install:server && npm run install:client",
     "dev:client": "cd ./client && npm run dev",
     "dev:server": "cd ./server && npm run dev",
