@@ -1,0 +1,41 @@
+$fieldset-margin: 10px;
+
+.btns-wrapper {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.left-btn-wrapper {
+  width: 50%;
+  padding-right: $fieldset-margin / 2;
+  text-align: right;
+}
+
+.right-btn-wrapper {
+  width: 50%;
+  padding-left: $fieldset-margin / 2;
+  text-align: left;
+}
+
+.reset-btn {
+  margin-right: 20px;
+}
+
+.form-title {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  margin-bottom: 20px;
+}
+
+.add-point-label {
+  font-size: 12px;
+}
+
+.add-point-btn {
+  margin-right: 0.4em;
+  width: 20px;
+  height: 20px;
+}

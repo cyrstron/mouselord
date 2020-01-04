@@ -1,0 +1,9 @@
+@import '@styles/mixins/resets.scss';
+
+.nav-list {
+  @include ul-reset;
+
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+}

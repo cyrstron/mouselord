@@ -1,0 +1,20 @@
+.geo-point-setter {
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  display: flex;
+
+  &.is-editing {
+    margin-bottom: 25px;
+  }
+}
+
+.panel {
+  margin-left: 5px;
+  width: 55px;
+}
+
+.point {
+  flex-grow: 1;
+}

@@ -1,0 +1,25 @@
+@mixin button($buttonColor) {
+  background-color: $buttonColor;
+  border: 1px solid darken($buttonColor, 10%);
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background-color: lighten($buttonColor, 10%);
+    border-color: $buttonColor;
+  }
+
+  &:active {
+    background-color: darken($buttonColor, 10%);
+    border-color:  darken($buttonColor, 20%);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba($buttonColor, 0.5);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

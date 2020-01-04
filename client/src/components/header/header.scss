@@ -1,0 +1,13 @@
+.header {
+  background-color: #282c34;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-items: stretch;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.nav-menu {
+  flex-grow: 1;
+}

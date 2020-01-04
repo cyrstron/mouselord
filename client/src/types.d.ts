@@ -1,0 +1,16 @@
+declare module '*.scss' {
+  const content: {[className: string]: string};
+  export default content;
+}
+
+declare module '*.css' {
+  const content: {[className: string]: string};
+  export default content;
+}
+
+declare namespace geo {
+  interface Location {
+    lat: number;
+    lng: number;
+  }
+}
