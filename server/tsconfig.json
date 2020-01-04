@@ -9,15 +9,11 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "resolveJsonModule": true,
-    "outDir": "./.dist",
-    "sourceRoot": "./src",
+    "outDir": ".dist",
+    "sourceRoot": "src",
     "baseUrl": ".",
     "typeRoots" : [
       "./node_modules/@types"
     ]
-  },
-  "include": [
-    "./src/**/*",
-    "tsconfig.json"
-  ]
+  }
 }
