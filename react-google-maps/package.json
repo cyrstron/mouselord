@@ -2,7 +2,7 @@
   "name": "react-google-maps-ts",
   "main": "./.dist/maps.js",
   "types": "./.dist/index.d.ts",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "React components library for google maps.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
