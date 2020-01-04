@@ -1,4 +1,5 @@
 import {Application} from 'express';
+import path from 'path';
 import {Routers} from './routers';
 import { Middlewares } from './middlewares';
 
@@ -31,6 +32,10 @@ export class Server {
     app.use('/auth', auth);
     
     app.use('/api', api);
+    
+    app.get('*', (_req, res) => {      
+      res.sendFile(path.join(__dirname, '../../static/client/index.html'));
+    })
 
     app.use(handleError);
   }

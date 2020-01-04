@@ -18,7 +18,7 @@ export function createMiddlewares({
 }: Controllers) {
   return {
     parseJson: bodyParser.json(),
-    staticServer: express.static(path.resolve(__dirname, '../static')),
+    staticServer: express.static(path.resolve(__dirname, '../../../static')),
     verifyToken: auth.verifyToken,
     handleError
   };
