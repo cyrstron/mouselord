@@ -8,7 +8,9 @@
     "dev": "nodemon",
     "build": "tsc",
     "start": "node ./.dist/index.js",
-    "debug": "node --inspect -r ts-node/register src/index.ts"
+    "debug": "node --inspect -r ts-node/register src/index.ts",
+    "link:grider": "npm link @mouselord/grider",
+    "links": "npm run link:grider"
   },
   "author": "",
   "license": "ISC",

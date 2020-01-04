@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "link:maps": "npm link react-google-maps-ts",
+    "link:grider": "npm link @mouselord/grider",
+    "links": "npm run link:maps && npm run link:grider"
   },
   "author": "",
   "license": "ISC",
