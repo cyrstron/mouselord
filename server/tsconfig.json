@@ -11,7 +11,7 @@
     "resolveJsonModule": true,
     "outDir": "./.dist",
     "sourceRoot": "./src",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "typeRoots" : [
       "./node_modules/@types"
     ]

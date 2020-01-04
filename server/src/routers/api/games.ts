@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import { GamesController } from 'controllers/games-controller';
+import { GamesController } from '../../controllers/games-controller';
 
 export const createGamesRouter = (
   Router: () => Router,

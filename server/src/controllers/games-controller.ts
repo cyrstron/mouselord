@@ -1,14 +1,13 @@
 import { RequestHandler } from "express";
 import { RequestWithUser } from "./auth-controller";
 import { HttpError } from "../errors/http-error";
-import { GamesService } from "services/games-service";
-import { Game } from "models/games";
+import { GamesService } from "../services/games-service";
+import { Game } from "../models/games";
 
 export class GamesController {
   constructor(
     private games: GamesService,
   ) {}
-
 
   getGameById: RequestHandler = async (req: RequestWithUser, res, next) => {
     const {
