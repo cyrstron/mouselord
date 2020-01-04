@@ -84,7 +84,7 @@ module.exports = (env, argv) => {
         chunkFilename: isDevelopment ? "[name].css" : "[name].[hash].css",
       }),    
       new Dotenv({
-        path: './.env',
+        path: '../.env',
       }),
       new CleanWebpackPlugin(),
     ],
