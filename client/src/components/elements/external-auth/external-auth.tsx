@@ -92,12 +92,12 @@ class ExternalAuth extends Component<ExternalAuthProps> {
         <div className={cx('wrapper', className)}>
           <GoogleLogin
             className={cx('auth-item')}
-            clientId={process.env.GAPI_KEY}
+            clientId={process.env.GAPI_KEY as string}
             onSuccess={this.onGoogleSuccess}
           />
           <FacebookLogin
             className={cx('auth-item')}
-            appId={process.env.FB_KEY}
+            appId={process.env.FB_KEY as string}
             onSuccess={this.onFacebookSuccess}
           />
         </div>

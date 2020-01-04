@@ -22,7 +22,7 @@ ReactDOM.render((
       <MobxProvider
         {...stores}
       >
-        <GoogleApiProvider apiKey={process.env.GOOGLE_MAPS_KEY}>
+        <GoogleApiProvider apiKey={process.env.GOOGLE_MAPS_KEY as string}>
           <App />
         </GoogleApiProvider>
       </MobxProvider>
