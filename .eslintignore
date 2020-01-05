@@ -1,2 +1,6 @@
 static
 server/.dist
+server/node_modules
+client/node_modules
+grider
+resct-google-maps

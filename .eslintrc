@@ -30,6 +30,15 @@
         "google"
       ],
       "rules": {
+        "no-unused-vars": [
+          "error",
+          {
+            "ignoreRestSiblings": true
+          }
+        ],
+        "@typescript-eslint/no-unused-vars": ["error", {
+          "ignoreRestSiblings": true
+        }],
         "no-invalid-this": 0,
         "require-jsdoc": 0,
         "max-len": ["error", {
@@ -53,12 +62,6 @@
         "plugin:react/recommended"
       ],
       "rules": {
-        "no-unused-vars": [
-          "error",
-          {
-            "ignoreRestSiblings": true
-          }
-        ],
         "react/no-unescaped-entities": 0,
         "react/jsx-indent-props": [
           "error",
