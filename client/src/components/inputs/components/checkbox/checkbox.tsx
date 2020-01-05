@@ -1,16 +1,16 @@
-import React, { InputHTMLAttributes, Component, ChangeEvent, ReactNode } from 'react';
+import React, {InputHTMLAttributes, Component, ChangeEvent, ReactNode} from 'react';
 import classNames from 'classnames/bind';
 
-import { InputStore } from '@stores/input-store';
-import { observer } from 'mobx-react';
-import { InputError } from '../input-error/input-error';
+import {InputStore} from '@stores/input-store';
+import {observer} from 'mobx-react';
+import {InputError} from '../input-error/input-error';
 
 import styles from './checkbox.scss';
 
 const cx = classNames.bind(styles);
 
 export interface InputProps extends Omit<
-  InputHTMLAttributes<HTMLInputElement>, 
+  InputHTMLAttributes<HTMLInputElement>,
   'value' | 'title' | 'type'
 > {
   title: ReactNode;
@@ -43,9 +43,9 @@ export class Checkbox extends Component<InputProps, {}> {
       title,
       ...props
     } = this.props;
-  
+
     return (
-      <div      
+      <div
         className={cx('control', className, {
           'is-invalid': isValid === false,
           'is-valid': isValid && isTouched,
@@ -62,17 +62,17 @@ export class Checkbox extends Component<InputProps, {}> {
             type='checkbox'
           />
         </span>
-        <label 
+        <label
           htmlFor={id}
           className={cx('label')}
         >
           {title}
         </label>
-        <InputError 
+        <InputError
           className={cx('error')}
-          error={error} 
+          error={error}
         />
       </div>
-    )
+    );
   }
 }

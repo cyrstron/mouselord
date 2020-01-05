@@ -1,21 +1,21 @@
-import React, { 
-  TextareaHTMLAttributes, 
-  Component, 
-  ChangeEvent, 
-  ReactNode 
+import React, {
+  TextareaHTMLAttributes,
+  Component,
+  ChangeEvent,
+  ReactNode,
 } from 'react';
 import classNames from 'classnames/bind';
-import { observer } from 'mobx-react';
+import {observer} from 'mobx-react';
 
-import { InputStore } from '@stores/input-store';
+import {InputStore} from '@stores/input-store';
+import {InputError} from '../input-error/input-error';
 
 import styles from './textarea.scss';
-import { InputError } from '../input-error/input-error';
 
 const cx = classNames.bind(styles);
 
 export interface TextareaProps extends Omit<
-TextareaHTMLAttributes<HTMLTextAreaElement>, 
+TextareaHTMLAttributes<HTMLTextAreaElement>,
   'value' | 'title'
 > {
   title: ReactNode;
@@ -48,16 +48,16 @@ export class Textarea extends Component<TextareaProps, {}> {
       title,
       ...props
     } = this.props;
-  
+
     return (
-      <div      
+      <div
         className={cx('control', className, {
           'is-invalid': isValid === false,
           'is-valid': isValid && isTouched,
           'is-pending': isPending,
         })}
       >
-        <label 
+        <label
           htmlFor={id}
           className={cx('label')}
         >
@@ -72,8 +72,8 @@ export class Textarea extends Component<TextareaProps, {}> {
             className={cx('textarea')}
           />
         </span>
-        <InputError 
-          error={error} 
+        <InputError
+          error={error}
           className={cx('error')}
         />
       </div>

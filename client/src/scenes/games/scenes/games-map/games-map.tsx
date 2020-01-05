@@ -18,7 +18,7 @@ interface GamesMapProps {
 }
 
 type Props = GamesMapProps & {
-  mapService?: MapService,
+  mapService?: MapService;
 }
 
 @inject('geolocationStore')
@@ -47,21 +47,21 @@ export class GamesMap extends Component<Props> {
     if (position === undefined) return null;
 
     return (
-        <DumbMap
-          className={cx('game-map', className)}
-          defaultCenter={position}
-          zoom={16}
-          clickableIcons={false}
-          disableDefaultUI={false}
-          gestureHandling='greedy'
-          mapTypeControl={false}
-          streetViewControl={false}
-          zoomControl={false}
-          fullscreenControl={false}       
-        >
-          {this.props.children}
-          <PositionMarker />
-        </DumbMap>
+      <DumbMap
+        className={cx('game-map', className)}
+        defaultCenter={position}
+        zoom={16}
+        clickableIcons={false}
+        disableDefaultUI={false}
+        gestureHandling='greedy'
+        mapTypeControl={false}
+        streetViewControl={false}
+        zoomControl={false}
+        fullscreenControl={false}
+      >
+        {this.props.children}
+        <PositionMarker />
+      </DumbMap>
     );
   }
 }

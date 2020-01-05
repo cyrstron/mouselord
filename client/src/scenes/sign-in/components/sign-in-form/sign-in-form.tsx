@@ -1,27 +1,27 @@
-import React, {Component, FormEvent} from "react";
-import { RouteComponentProps } from "react-router";
+import React, {Component, FormEvent} from 'react';
+import {RouteComponentProps} from 'react-router';
 import classnames from 'classnames/bind';
-import { observer } from "mobx-react";
-import { SignInStore } from "./stores/sign-in-store";
-import { Input } from "@components/inputs";
-import { SignInPayload } from "@state/reducers/auth/auth-operations";
-import { SubmitBtn, CancelBtn } from "@components/buttons";
+import {observer} from 'mobx-react';
+import {SignInStore} from './stores/sign-in-store';
+import {Input} from '@components/inputs';
+import {SignInPayload} from '@state/reducers/auth/auth-operations';
+import {SubmitBtn, CancelBtn} from '@components/buttons';
 
 import styles from './sign-in-form.scss';
 
 const cx = classnames.bind(styles);
 
-export interface SignInProps extends RouteComponentProps {
-  signIn: (userPayload: SignInPayload)=> Promise<void>;
+export interface SignInFormProps extends RouteComponentProps {
+  signIn: (userPayload: SignInPayload) => Promise<void>;
   error?: Error;
-  isPending: boolean; 
+  isPending: boolean;
 }
 
 @observer
-class SignInForm extends Component<SignInProps> {
+class SignInForm extends Component<SignInFormProps> {
   signInStore: SignInStore;
 
-  constructor(props: SignInProps) {
+  constructor(props: SignInFormProps) {
     super(props);
 
     this.signInStore = new SignInStore();
@@ -31,7 +31,7 @@ class SignInForm extends Component<SignInProps> {
     e.preventDefault();
 
     const {
-      signIn
+      signIn,
     } = this.props;
 
     await this.signInStore.validate();
@@ -74,7 +74,7 @@ class SignInForm extends Component<SignInProps> {
       >
         {isPending && 'Loading...'}
         {error && error.message}
-        <form 
+        <form
           onSubmit={this.onSubmit}
           onReset={this.onReset}
         >
@@ -83,14 +83,14 @@ class SignInForm extends Component<SignInProps> {
             title='Email:'
             inputStore={email}
             id='signup-email-field'
-          /> 
+          />
           <Input
             className={cx('input')}
             title='Password:'
             inputStore={password}
             type='password'
             id='signup-password-field'
-          /> 
+          />
           <div
             className={cx('btn-wrapper')}
           >

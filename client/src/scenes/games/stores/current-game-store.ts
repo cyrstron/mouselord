@@ -1,12 +1,12 @@
-import { observable, action, computed } from "mobx";
-import { Game } from "@state/actions/games-requests/actions";
+import {observable, action, computed} from 'mobx';
+import {Game} from '@state/actions/games-requests/actions';
 import {
-  GridParams, 
-  IndexatedFigure, 
-  GeoPolygon, 
-  Cell, 
-  GeoPoint 
-} from "@mouselord/grider";
+  GridParams,
+  IndexatedFigure,
+  GeoPolygon,
+  Cell,
+  GeoPoint,
+} from '@mouselord/grider';
 
 class CurrentGameStore {
   @observable isReady = false;
@@ -30,7 +30,7 @@ class CurrentGameStore {
   }
 
   @action
-  async setGame(game: Game) {
+  async setGame(game: Game): Promise<void> {
     this.game = game;
 
     if (!this.gridParams) return;
@@ -52,7 +52,7 @@ class CurrentGameStore {
   }
 
   @action
-  resetGame() {
+  resetGame(): void {
     this.game = undefined;
     this.borderFigure = undefined;
     this.error = undefined;
@@ -61,11 +61,11 @@ class CurrentGameStore {
     this.selectedObject = undefined;
   }
 
-  selectObject(object: Cell) {
+  selectObject(object: Cell): void {
     this.selectedObject = object;
   }
-  
-  setPosition(position: GeoPoint) {
+
+  setPosition(position: GeoPoint): void {
     this.position = position;
 
     if (!this.isReady) return;
@@ -76,4 +76,4 @@ class CurrentGameStore {
   }
 }
 
-export {CurrentGameStore}
+export {CurrentGameStore};

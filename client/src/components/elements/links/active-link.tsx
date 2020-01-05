@@ -1,11 +1,11 @@
 import React from 'react';
 import cx from 'classnames';
-import { 
-  LinkProps, 
-  withRouter, 
+import {
+  LinkProps,
+  withRouter,
   RouteComponentProps,
   matchPath,
-  Link
+  Link,
 } from 'react-router-dom';
 
 export interface ActiveLinkProps extends LinkProps {
@@ -36,10 +36,10 @@ const ActiveLinkComponent = ({
 
   if (!isDisabled) {
     return (
-      <Link 
-        to={to} 
+      <Link
+        to={to}
         className={cx(className, activeClassName && {
-          [activeClassName]: isActive
+          [activeClassName]: isActive,
         })}
       >
         {children}
@@ -48,18 +48,18 @@ const ActiveLinkComponent = ({
   }
 
   return main ? (
-    <h1 
+    <h1
       className={cx(className, activeClassName)}
     >
       {children}
     </h1>
   ) : (
-    <span 
+    <span
       className={cx(className, activeClassName)}
     >
       {children}
     </span>
   );
-}
+};
 
 export const ActiveLink = withRouter(ActiveLinkComponent);

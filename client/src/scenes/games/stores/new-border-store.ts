@@ -1,18 +1,18 @@
-import { GeoPointStore } from "./point-store";
-import { GeoPoint, Cell, Polygon, GeoPolygon, Figure, GridParams, IndexatedFigure } from "@mouselord/grider";
-import { observable, computed, action } from "mobx";
-import { InputsStore, FormField } from "@stores/inputs-store";
-import { NewGameStore } from "./new-game-store";
+import {GeoPointStore} from './point-store';
+import {GeoPoint, Cell, GeoPolygon, Figure, IndexatedFigure} from '@mouselord/grider';
+import {observable, computed, action} from 'mobx';
+import {InputsStore, FormField} from '@stores/inputs-store';
+import {NewGameStore} from './new-game-store';
 
 export class NewBorderStore {
-  @observable isApplied: boolean = false;
-  @observable isPending: boolean = false;
+  @observable isApplied = false;
+  @observable isPending = false;
 
   @observable points: GeoPointStore[];
   @observable selectedPointIndex?: number;
   @observable selfIntersections: GeoPoint[] = [];
   @observable invalidCells: Cell[] = [];
-  
+
   inputs: InputsStore;
 
   constructor(
@@ -23,22 +23,22 @@ export class NewBorderStore {
 
     this.inputs = new InputsStore({
       inputs: this.points,
-      validate: this.validateFigure
+      validate: this.validateFigure,
     });
   }
 
   @action
-  selectPoint(pointIndex: number) {
+  selectPoint(pointIndex: number): void {
     this.selectedPointIndex = pointIndex;
   }
 
   @action
-  resetSelection() {
+  resetSelection(): void {
     this.selectedPointIndex = undefined;
   }
 
   @action
-  addPoint(geoPoint: grider.GeoPoint) {
+  addPoint(geoPoint: grider.GeoPoint): void {
     this.setPoints([
       new GeoPointStore(geoPoint),
       ...this.points,
@@ -46,7 +46,7 @@ export class NewBorderStore {
   }
 
   @action
-  insertPoint(index: number, geoPoint: grider.GeoPoint) {
+  insertPoint(index: number, geoPoint: grider.GeoPoint): void {
     this.setPoints([
       ...this.points.slice(0, index),
       new GeoPointStore(geoPoint),
@@ -61,7 +61,7 @@ export class NewBorderStore {
   }
 
   @action
-  setPoints(point: GeoPointStore[]) {    
+  setPoints(point: GeoPointStore[]): void {
     this.points = point;
 
     this.inputs.setInputs(this.points);
@@ -69,26 +69,26 @@ export class NewBorderStore {
     this.onReset();
   }
 
-  
+
   @action
-  insertNearSelected(geoPoint: grider.GeoPoint) {    
+  insertNearSelected(geoPoint: grider.GeoPoint): void {
     if (this.selectedPointIndex === undefined) {
       this.addPoint(geoPoint);
 
       return;
-    } 
+    }
 
     const {values, selectedPointIndex} = this;
 
     const point = GeoPoint.fromPlain(geoPoint);
     const prevPoint = GeoPoint.fromPlain(
-      values[selectedPointIndex - 1] || values[values.length - 1]
+      values[selectedPointIndex - 1] || values[values.length - 1],
     );
     const nextPoint = GeoPoint.fromPlain(
-      values[selectedPointIndex + 1] || values[0]
+      values[selectedPointIndex + 1] || values[0],
     );
-    
-    const isPrevCloser = point.calcMercDistance(prevPoint) < 
+
+    const isPrevCloser = point.calcMercDistance(prevPoint) <
       point.calcMercDistance(nextPoint);
 
     const index = isPrevCloser ? selectedPointIndex : selectedPointIndex + 1;
@@ -97,7 +97,7 @@ export class NewBorderStore {
   }
 
   @action
-  deletePoint(index: number) {
+  deletePoint(index: number): void {
     if (this.points.length === 1) return;
 
     this.setPoints([
@@ -115,7 +115,7 @@ export class NewBorderStore {
   }
 
   @action
-  updateSelectedPoint(point: grider.GeoPoint) {
+  updateSelectedPoint(point: grider.GeoPoint): void {
     const {selectedPointIndex} = this;
 
     if (selectedPointIndex === undefined) return;
@@ -124,7 +124,7 @@ export class NewBorderStore {
   }
 
   @action
-  updatePoint(index: number, point: grider.GeoPoint) {
+  updatePoint(index: number, point: grider.GeoPoint): void {
     const pointStore = this.points[index];
 
     if (!pointStore) return;
@@ -135,7 +135,7 @@ export class NewBorderStore {
   }
 
   @action
-  reset() {
+  reset(): void {
     this.setPoints([]);
 
     this.isApplied = false;
@@ -144,14 +144,13 @@ export class NewBorderStore {
     this.resetSelection();
   }
 
-  validateFigure = async (inputs: FormField<grider.GeoPoint>[]) => {
-
+  validateFigure = async (inputs: FormField<grider.GeoPoint>[]): Promise<void | never> => {
     if (inputs.length < 3) throw new Error('Border should have at least 3 points');
 
     const {gridParams} = this.newGameStore;
 
     if (!gridParams) throw new Error('Grid parameters should be specified');
-    
+
     const borderPoints = inputs.map(({value}) => GeoPoint.fromPlain(value));
 
     const borderPoly = new GeoPolygon(borderPoints);
@@ -162,7 +161,7 @@ export class NewBorderStore {
     this.invalidCells = cells;
 
     if (points.length > 0) throw new Error('Border shouldn\'t intersect itself');
-    
+
     if (cells.length > 0) throw new Error('Border points should be further from each other');
   }
 
@@ -180,17 +179,17 @@ export class NewBorderStore {
     return [...values, values[0]];
   }
 
-  get isValid() {
+  get isValid(): boolean {
     return this.inputs.isValid;
   }
-  
+
   @computed
-  get error() {
+  get error(): Error | undefined {
     return this.inputs.error;
   }
 
   @action
-  async onApply() {
+  async onApply(): Promise<void> {
     this.isPending = true;
 
     await this.inputs.validate();
@@ -200,23 +199,23 @@ export class NewBorderStore {
     if (this.inputs.isValid && gridParams) {
       const borderShape = GeoPolygon.fromPlain(this.values);
 
-      const borderFigure = await IndexatedFigure.fromShape(borderShape, gridParams)
-  
+      const borderFigure = await IndexatedFigure.fromShape(borderShape, gridParams);
+
       this.newGameStore.setBorderFigure(borderFigure);
 
       this.isApplied = true;
       this.selectedPointIndex = undefined;
-    };
+    }
 
     this.isPending = false;
   }
 
   @action
-  onReset() {
+  onReset(): void {
     this.isApplied = false;
     this.selfIntersections = [];
     this.invalidCells = [];
-    this.inputs.refresh(); 
+    this.inputs.refresh();
 
     this.newGameStore.resetBorderFigure();
   }

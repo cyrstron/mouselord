@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
-import { CurrentGameStore } from '@scenes/games/stores/current-game-store';
-import { Cell } from '@mouselord/grider';
-import { Polygon } from 'react-google-maps-ts';
+import React, {Component} from 'react';
+import {inject, observer} from 'mobx-react';
+import {CurrentGameStore} from '@scenes/games/stores/current-game-store';
+import {Cell} from '@mouselord/grider';
+import {Polygon} from 'react-google-maps-ts';
 
 export interface SelectedObjectProps {
   currentGameStore?: CurrentGameStore;
@@ -11,7 +11,7 @@ export interface SelectedObjectProps {
 @inject('currentGameStore')
 @observer
 class SelectedObject extends Component<SelectedObjectProps> {
-  render() {    
+  render() {
     const {selectedObject} = this.props.currentGameStore!;
 
     if (!selectedObject) return null;
@@ -24,7 +24,7 @@ class SelectedObject extends Component<SelectedObjectProps> {
           fillColor="transparent"
           strokeWeight={2}
         />
-      )
+      );
     } else {
       return null;
     }

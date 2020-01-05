@@ -1,15 +1,15 @@
-import React, { Component, createRef } from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames/bind';
-import { RouteComponentProps } from 'react-router-dom';
-import { Game } from '@state/actions/games-requests/actions';
-import { inject, observer } from 'mobx-react';
-import { CurrentGameStore } from '@scenes/games/stores/current-game-store';
+import {RouteComponentProps} from 'react-router-dom';
+import {Game} from '@state/actions/games-requests/actions';
+import {inject, observer} from 'mobx-react';
+import {CurrentGameStore} from '@scenes/games/stores/current-game-store';
 
 import styles from './current-game.scss';
 
 const cx = classnames.bind(styles);
 
-interface CurrentGameProps extends RouteComponentProps<{id: string}> {
+export interface CurrentGameProps extends RouteComponentProps<{id: string}> {
   className?: string;
   fetchGame: (id: string) => Promise<void>;
   resetGame: () => void;
@@ -25,7 +25,7 @@ class CurrentGame extends Component<CurrentGameProps> {
   componentDidMount() {
     const {
       fetchGame,
-      match: {params: {id}}
+      match: {params: {id}},
     } = this.props;
 
     fetchGame(id);
@@ -67,8 +67,8 @@ class CurrentGame extends Component<CurrentGameProps> {
           </div>
         )}
       </div>
-    )
+    );
   }
 }
 
-export {CurrentGame}
+export {CurrentGame};

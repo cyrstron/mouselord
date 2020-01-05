@@ -17,10 +17,10 @@ export class InputStore<Value = string> {
   @observable value: Value;
 
   @observable isValid?: boolean;
-  @observable isTouched: boolean = false;
-  @observable isPending: boolean = false;
+  @observable isTouched = false;
+  @observable isPending = false;
   @observable error?: Error;
-  
+
   validationCallback?: ValidateFunc<Value>;
   defaultValue?: Value;
   validations: Set<Promise<void | never>> = new Set();
@@ -43,13 +43,13 @@ export class InputStore<Value = string> {
   }
 
   @action
-  validateValue = async () => {
-    let isValid: boolean = true;
+  validateValue = async (): Promise<void> => {
+    let isValid = true;
     let error: Error | undefined;
     let validationPromise: Promise<void | never> | undefined;
 
     try {
-      validationPromise = this.validationCallback && 
+      validationPromise = this.validationCallback &&
         this.validationCallback(this.value) as Promise<void> | undefined;
 
       if (validationPromise instanceof Promise) {
@@ -62,7 +62,7 @@ export class InputStore<Value = string> {
       error = err;
       isValid = false;
     } finally {
-      let isCancelled: boolean = false;
+      let isCancelled = false;
 
       if (validationPromise) {
         isCancelled = !this.validations.has(validationPromise);
@@ -85,7 +85,7 @@ export class InputStore<Value = string> {
 
   validateDebounced = debounce(this.validateValue, 500);
 
-  validate() {
+  validate(): Promise<void> {
     if (!this.isTouched) {
       this.isTouched = true;
     }
@@ -94,14 +94,14 @@ export class InputStore<Value = string> {
       this.debouncePromise = new Promise((res) => {
         this.resolveValidation = res;
       });
-    };
+    }
 
     this.validateDebounced();
-    
+
     return this.debouncePromise;
   }
 
-  @action setValue(value: Value) {
+  @action setValue(value: Value): void {
     if (!this.isTouched) {
       this.isTouched = true;
     }
@@ -118,10 +118,10 @@ export class InputStore<Value = string> {
 
     this.relatedInputs.forEach((input) => {
       input.isTouched && input.validate();
-    })
+    });
   }
 
-  @action reset() {
+  @action reset(): void {
     this.isValid = undefined;
     this.isTouched = false;
     this.isPending = false;

@@ -1,25 +1,25 @@
 import {connect} from 'react-redux';
-import { UserInfoComponent } from './user-info';
-import { AppState } from '@state/index';
-import { 
-  selectAuthToken, 
-  selectCurrentUser, 
-  selectCurrentUserPending, 
-  selectCurrentUserError 
+import {UserInfoComponent, UserInfoProps} from './user-info';
+import {AppState} from '@state/index';
+import {
+  selectCurrentUser,
+  selectCurrentUserPending,
+  selectCurrentUserError,
 } from '@state/reducers/auth/auth-selectors';
-import { signOut, getCurrentUser } from '@state/reducers/auth/auth-operations';
+import {signOut, getCurrentUser} from '@state/reducers/auth/auth-operations';
 
-const mapStateToProps = (state: AppState) => ({
-  authToken: selectAuthToken(state),
+const mapStateToProps = (
+  state: AppState,
+): Pick<UserInfoProps, 'currentUser' | 'error' | 'isPending'> => ({
   currentUser: selectCurrentUser(state),
   error: selectCurrentUserError(state),
   isPending: selectCurrentUserPending(state),
 });
 
 export const UserInfo = connect(
-  mapStateToProps, 
+  mapStateToProps,
   {
     signOut,
-    getCurrentUser
-  }
+    getCurrentUser,
+  },
 )(UserInfoComponent);

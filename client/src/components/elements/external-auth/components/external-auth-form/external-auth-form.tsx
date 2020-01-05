@@ -1,18 +1,18 @@
-import React, {Component, FormEvent} from "react";
-import { RouteComponentProps } from "react-router";
+import React, {Component, FormEvent} from 'react';
+import {RouteComponentProps} from 'react-router';
 import classnames from 'classnames/bind';
-import { observer } from "mobx-react";
-import { Input } from "@components/inputs/components/input/input";
+import {observer} from 'mobx-react';
+import {Input} from '@components/inputs/components/input/input';
 
-import { ExternalAuthStore } from "./stores/external-auth-store";
-import { ExternalAuthData } from "@state/actions/auth-request/actions";
-import { SubmitBtn, CancelBtn } from "@components/buttons";
+import {ExternalAuthStore} from './stores/external-auth-store';
+import {ExternalAuthData} from '@state/actions/auth-request/actions';
+import {SubmitBtn, CancelBtn} from '@components/buttons';
 
 import styles from './external-auth-form.scss';
 
 const cx = classnames.bind(styles);
 
-interface ExternalAuthFormProps extends RouteComponentProps {
+export interface ExternalAuthFormProps extends RouteComponentProps {
   signIn: (authData: ExternalAuthData) => Promise<void>;
   signInError?: Error;
   isSignedIn: boolean;
@@ -64,7 +64,7 @@ class ExternalAuthForm extends Component<ExternalAuthFormProps> {
 
     const {
       signInError,
-      isAuthPending
+      isAuthPending,
     } = this.props;
 
     const error = signInError || storeError;
@@ -74,10 +74,10 @@ class ExternalAuthForm extends Component<ExternalAuthFormProps> {
       <div className={cx('form')}>
         {isPending && 'Loading...'}
         {error && error.message}
-        <form 
+        <form
           onSubmit={this.onSubmit}
           onReset={this.onReset}
-        >   
+        >
           <Input
             className={cx('input')}
             title='Name:'

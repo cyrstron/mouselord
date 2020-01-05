@@ -1,18 +1,18 @@
 import React, {Component, ReactNode} from 'react';
 import classnames from 'classnames/bind';
-import { GoogleLogin } from './components/google-auth';
-import { FacebookLogin, FacebookUser } from './components/facebook-auth';
-import { observer } from 'mobx-react';
-import { ExternalAuthForm } from './components/external-auth-form';
-import { RouteComponentProps } from 'react-router';
-import { observable, computed } from 'mobx';
+import {GoogleLogin} from './components/google-auth';
+import {FacebookLogin, FacebookUser} from './components/facebook-auth';
+import {observer} from 'mobx-react';
+import {ExternalAuthForm} from './components/external-auth-form';
+import {RouteComponentProps} from 'react-router';
+import {observable, computed} from 'mobx';
 
-import { FacebookAuthData, ExternalAuthData } from '@state/actions/auth-request/actions';
+import {FacebookAuthData, ExternalAuthData} from '@state/actions/auth-request/actions';
 import styles from './external-auth.scss';
 
 const cx = classnames.bind(styles);
 
-interface ExternalAuthProps extends RouteComponentProps {
+export interface ExternalAuthProps extends RouteComponentProps {
   className?: string;
   signInWithGoogle: (googleToken: string) => Promise<void>;
   signInWithFacebook: (
@@ -21,7 +21,7 @@ interface ExternalAuthProps extends RouteComponentProps {
   ) => Promise<void>;
   isSignedIn: boolean;
   authError?: Error;
-  children: ReactNode
+  children: ReactNode;
 }
 
 @observer
@@ -59,7 +59,7 @@ class ExternalAuth extends Component<ExternalAuthProps> {
   ) => {
     const {accessToken} = fbResponse;
     const {email} = user;
-    
+
     const {signInWithFacebook} = this.props;
 
     await signInWithFacebook(email, accessToken);
@@ -73,7 +73,7 @@ class ExternalAuth extends Component<ExternalAuthProps> {
     }
 
     if (authError) return;
-    
+
     this.fbInfo = {
       email,
       facebookToken: accessToken,
@@ -82,8 +82,8 @@ class ExternalAuth extends Component<ExternalAuthProps> {
 
   render() {
     const {
-      className, 
-      authError, 
+      className,
+      authError,
       children,
     } = this.props;
 
@@ -105,7 +105,7 @@ class ExternalAuth extends Component<ExternalAuthProps> {
           authError.message
         )}
         {!authError && this.hasToken && (
-          <ExternalAuthForm 
+          <ExternalAuthForm
             authData={{
               googleToken: this.googleToken,
               ...this.fbInfo,

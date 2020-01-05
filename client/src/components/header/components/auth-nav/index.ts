@@ -1,14 +1,16 @@
 import {connect} from 'react-redux';
-import { AuthNav as AuthNavComponent } from './auth-nav';
-import { AppState } from '@state/index';
-import { 
-  selectIsAuthenticated, 
-  selectNeedTokenValidation, 
-  selectValidateTokenPending 
+import {AuthNav as AuthNavComponent, AuthNavProps} from './auth-nav';
+import {AppState} from '@state/index';
+import {
+  selectIsAuthenticated,
+  selectNeedTokenValidation,
+  selectValidateTokenPending,
 } from '@state/reducers/auth/auth-selectors';
-import { validateToken } from '@state/reducers/auth/auth-operations';
+import {validateToken} from '@state/reducers/auth/auth-operations';
 
-const mapStateToProps = (state: AppState) => ({
+const mapStateToProps = (
+  state: AppState,
+): Pick<AuthNavProps, 'isAuthenticated' | 'needValidation' | 'isPending'> => ({
   isAuthenticated: selectIsAuthenticated(state),
   needValidation: selectNeedTokenValidation(state),
   isPending: selectValidateTokenPending(state),
@@ -17,6 +19,6 @@ const mapStateToProps = (state: AppState) => ({
 export const AuthNav = connect(
   mapStateToProps,
   {
-    validateToken
-  }
+    validateToken,
+  },
 )(AuthNavComponent);

@@ -1,21 +1,18 @@
 import {action, observable, computed} from 'mobx';
 import {InputStore} from '@stores/input-store';
-import { InputsStore } from '@stores/inputs-store';
+import {InputsStore} from '@stores/inputs-store';
 import {emailValidationRegex} from '../../../../../consts';
-import { 
-  validateEmailRequest, 
+import {
+  validateEmailRequest,
   validateNameRequest,
   signUpRequest,
 } from '@state/actions/auth-request/actions';
 
-interface SignUpStoreProps {
-}
-
 export class SignUpStore {
-  @observable isPending: boolean = false;
+  @observable isPending = false;
   @observable error?: Error;
 
-  isSubmitted: boolean = false;
+  isSubmitted = false;
 
   email: InputStore<string>;
   name: InputStore<string>;
@@ -27,22 +24,22 @@ export class SignUpStore {
   constructor() {
     this.email = new InputStore({
       value: '',
-      validate: this.validateEmail
+      validate: this.validateEmail,
     });
     this.name = new InputStore({
       value: '',
-      validate: this.validateName
+      validate: this.validateName,
     });
     this.passwordConfirm = new InputStore({
       value: '',
-      validate: this.validatePasswordConfirm
+      validate: this.validatePasswordConfirm,
     });
     this.password = new InputStore({
       value: '',
       validate: this.validatePassword,
       relatedInputs: [
         this.passwordConfirm,
-      ]
+      ],
     });
 
     this.inputs = new InputsStore({
@@ -55,7 +52,7 @@ export class SignUpStore {
     });
   }
 
-  validateEmail = async (value: string) => {
+  validateEmail = async (value: string): Promise<void | never> => {
     if (!value) throw Error('Email is required field');
 
     if (!emailValidationRegex.test(value)) throw Error('Email is not valid');
@@ -63,54 +60,58 @@ export class SignUpStore {
     await validateEmailRequest(value);
   }
 
-  validateName = async (value: string) => {
+  validateName = async (value: string): Promise<void | never> => {
     if (!value) throw Error('Name is required field');
 
     if (value.length < 3) throw Error('Name should have at least 3 characters');
 
-    await validateNameRequest(value);    
+    await validateNameRequest(value);
   }
 
-  validatePassword = (value: string) => {
+  validatePassword = (value: string): void | never => {
     if (!value) throw Error('Password is required field');
 
     if (value.length < 3) throw Error('Password should have at least 3 characters');
   }
 
-  validatePasswordConfirm = (value: string) => {
+  validatePasswordConfirm = (value: string): void | never => {
     if (!value) throw Error('Password confirmation is required field');
 
     if (value !== this.password.value) throw Error('Password confirmation should be equal password field');
   }
 
-  get isValid() {
+  get isValid(): boolean {
     return this.inputs.isValid;
   }
 
   @computed
-  get values() {
+  get values(): {
+    name: string;
+    email: string;
+    password: string;
+    } {
     return {
       email: this.email.value,
       name: this.name.value,
       password: this.password.value,
-    }
+    };
   }
 
-  async validate() {
+  async validate(): Promise<void> {
     await this.inputs.validate();
   }
 
   @action
-  reset() {
+  reset(): void {
     this.inputs.reset();
   }
 
-  @action 
-  async submit() {
+  @action
+  async submit(): Promise<void> {
     if (this.error) {
       this.error = undefined;
     }
-    
+
     this.isPending = true;
 
     await this.validate();
@@ -120,7 +121,7 @@ export class SignUpStore {
         await signUpRequest(this.values);
 
         this.isSubmitted = true;
-      };
+      }
     } catch (err) {
       this.error = err;
     } finally {

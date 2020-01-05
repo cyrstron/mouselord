@@ -12,9 +12,9 @@ export interface InputErrorProps {
 
 const InputError = ({
   error,
-  className
+  className,
 }: InputErrorProps) => !error ? null : (
-  <span 
+  <span
     className={cx('error', className)}
   >
     {error.message}

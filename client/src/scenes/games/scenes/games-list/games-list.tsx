@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames/bind';
 import {Link} from 'react-router-dom';
 
 import styles from './games-list.scss';
-import { Game } from '@state/actions/games-requests/actions';
-import { GameItem } from './components/game-item';
+import {Game} from '@state/actions/games-requests/actions';
+import {GameItem} from './components/game-item';
 
 const cx = classnames.bind(styles);
 
@@ -22,7 +22,7 @@ export class GamesList extends Component<GamesListProps> {
 
     fetchGames();
   }
-  
+
   render() {
     const {
       className,
@@ -46,7 +46,7 @@ export class GamesList extends Component<GamesListProps> {
         {!!games.length && (
           <ol className={cx('games-list')}>
             {games.map((game) => (
-              <GameItem 
+              <GameItem
                 className={cx('game-item')}
                 key={game._id}
                 game={game}

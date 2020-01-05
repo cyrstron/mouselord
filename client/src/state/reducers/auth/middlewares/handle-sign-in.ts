@@ -1,14 +1,12 @@
-import { Dispatch, MiddlewareAPI } from "redux";
-import { SIGN_IN_SUCCESS } from "../auth-consts";
-import { Action } from "@state/index";
+import {Dispatch} from 'redux';
+import {SIGN_IN_SUCCESS} from '../auth-consts';
+import {Action} from '@state/index';
 
-export const handleSignIn = (
-  _store: MiddlewareAPI
+export const handleSignIn = () => (
+  next: Dispatch,
 ) => (
-  next: Dispatch
-) => async (
-  action: Action
-) => {
+  action: Action,
+): Action => {
   if (action.type !== SIGN_IN_SUCCESS) return next(action);
 
   const {
@@ -18,4 +16,4 @@ export const handleSignIn = (
   localStorage.setItem('authToken', payload as string);
 
   return next(action);
-}
+};

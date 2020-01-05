@@ -1,30 +1,22 @@
-import { AppState } from '@state/index';
-import { selectIsAuthenticated, selectAuthError } from '@state/reducers/auth/auth-selectors';
-import { Dispatch } from 'redux';
-import { signInWithGoogle, signInWithFacebook } from '@state/reducers/auth/auth-operations';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
-import {ExternalAuth as ExternalAuthComponent} from './external-auth';
+import {AppState} from '@state/index';
+import {selectIsAuthenticated, selectAuthError} from '@state/reducers/auth/auth-selectors';
+import {signInWithGoogle, signInWithFacebook} from '@state/reducers/auth/auth-operations';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
+import {ExternalAuth as ExternalAuthComponent, ExternalAuthProps} from './external-auth';
 
-const mapStateToProps = (state: AppState) => ({
+const mapStateToProps = (
+  state: AppState,
+): Pick<ExternalAuthProps, 'isSignedIn' | 'authError'> => ({
   isSignedIn: selectIsAuthenticated(state),
-  authError: selectAuthError(state)
+  authError: selectAuthError(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  signInWithGoogle: async (googleToken: string) => {
-    await signInWithGoogle(googleToken)(dispatch);
-  },
-  signInWithFacebook: async (
-    email: string,
-    facebookToken: string,
-  ) => {
-    await signInWithFacebook(email, facebookToken)(dispatch);
-  },
-})
-
-const ExternalAuth = connect(mapStateToProps, mapDispatchToProps)(
-  withRouter(ExternalAuthComponent)
+const ExternalAuth = connect(mapStateToProps, {
+  signInWithGoogle,
+  signInWithFacebook,
+})(
+  withRouter(ExternalAuthComponent),
 );
 
 export {ExternalAuth};

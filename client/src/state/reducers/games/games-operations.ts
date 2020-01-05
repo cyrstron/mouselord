@@ -1,20 +1,20 @@
-import { Dispatch } from "redux";
-import { AppState } from "@state/index";
-import { 
-  fetchGamesPending, 
-  fetchGamesSuccess, 
-  fetchGamesFailure, 
-  fetchCurrentGamePending, 
+import {Dispatch} from 'redux';
+import {AppState} from '@state/index';
+import {
+  fetchGamesPending,
+  fetchGamesSuccess,
+  fetchGamesFailure,
+  fetchCurrentGamePending,
   fetchCurrentGameSuccess,
   fetchCurrentGameFailure,
   resetCurentGame,
-} from "./games-actions";
-import { getAllGames, getGameById } from "@state/actions/games-requests/actions";
+} from './games-actions';
+import {getAllGames, getGameById} from '@state/actions/games-requests/actions';
 
 export const fetchGames = () => async (
-  dispatch: Dispatch, 
+  dispatch: Dispatch,
   getState: () => AppState,
-) => {
+): Promise<void> => {
   const onPending = fetchGamesPending();
 
   dispatch(onPending);
@@ -30,12 +30,12 @@ export const fetchGames = () => async (
 
     dispatch(onFailure);
   }
-}
+};
 
 export const fetchCurrentGame = (gameId: string) => async (
-  dispatch: Dispatch, 
+  dispatch: Dispatch,
   getState: () => AppState,
-) => {
+): Promise<void> => {
   const onPending = fetchCurrentGamePending();
 
   dispatch(onPending);
@@ -51,6 +51,6 @@ export const fetchCurrentGame = (gameId: string) => async (
 
     dispatch(onFailure);
   }
-}
+};
 
 export {resetCurentGame};

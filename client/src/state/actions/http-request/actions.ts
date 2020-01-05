@@ -1,11 +1,11 @@
-import axios, {AxiosRequestConfig } from "axios";
+import axios, {AxiosRequestConfig} from 'axios';
 
 export type HttpRequestOptions = AxiosRequestConfig;
 export type RequestOptions = Omit<HttpRequestOptions, 'method'>;
 
 export const httpRequest = async <Response>(
   options: HttpRequestOptions,
-) => { 
+): Promise<Response> => {
   try {
     const {data} = await axios.request<Response>(options);
 
@@ -17,30 +17,30 @@ export const httpRequest = async <Response>(
   }
 };
 
-export const getRequest = <Response>(  
-  options: RequestOptions
-) => httpRequest<Response>({
+export const getRequest = <Response>(
+  options: RequestOptions,
+): Promise<Response> => httpRequest<Response>({
   ...options,
-  method: 'GET'
+  method: 'GET',
 });
 
-export const postRequest = <Response>(  
-  options: HttpRequestOptions
-) => httpRequest<Response>({
+export const postRequest = <Response>(
+  options: HttpRequestOptions,
+): Promise<Response> => httpRequest<Response>({
   ...options,
-  method: 'POST'
+  method: 'POST',
 });
 
-export const putRequest = <Response>(  
-  options: HttpRequestOptions
-) => httpRequest<Response>({
+export const putRequest = <Response>(
+  options: HttpRequestOptions,
+): Promise<Response> => httpRequest<Response>({
   ...options,
-  method: 'PUT'
+  method: 'PUT',
 });
 
-export const deleteRequest = <Response>(  
-  options: RequestOptions
-) => httpRequest<Response>({
+export const deleteRequest = <Response>(
+  options: RequestOptions,
+): Promise<Response> => httpRequest<Response>({
   ...options,
-  method: 'DELETE'
+  method: 'DELETE',
 });

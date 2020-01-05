@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames/bind';
-import { observer } from 'mobx-react';
-import { Button } from '@components/buttons';
+import {observer} from 'mobx-react';
 
 import styles from './geo-point.scss';
-import { GeoCoord } from './components/geo-coord/geo-coord';
+import {GeoCoord} from './components/geo-coord/geo-coord';
 
 const cx = classnames.bind(styles);
 
@@ -32,23 +31,23 @@ class GeoPoint extends Component<GeoPointProps> {
     } = this.props;
 
     return (
-      <div 
+      <div
         className={cx('geo-point', className, {
           'is-invalid': !isValid,
         })}
       >
-        <GeoCoord 
-          value={lat} 
-          title='lat:' 
+        <GeoCoord
+          value={lat}
+          title='lat:'
           className={cx('coord')}
         />
-        <GeoCoord 
+        <GeoCoord
           value={lng}
           title='lng:'
           className={cx('coord')}
         />
       </div>
-    )
+    );
   }
 }
 

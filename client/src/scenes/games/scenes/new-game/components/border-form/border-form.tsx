@@ -1,16 +1,16 @@
-import React, { Component, FormEvent, MouseEvent } from 'react';
-import { RouteComponentProps } from 'react-router';
+import React, {Component, FormEvent, MouseEvent} from 'react';
+import {RouteComponentProps} from 'react-router';
 import classnames from 'classnames/bind';
-import { inject, observer } from 'mobx-react';
+import {inject, observer} from 'mobx-react';
 
-import { CancelBtn, SubmitBtn, IconButton, SubmitIconBtn } from '@components/buttons';
-import { NewGameStore } from '@scenes/games/stores/new-game-store';
-import { GeoPointSetter } from './components/geo-point-setter';
-import { MapService } from 'react-google-maps-ts';
+import {CancelBtn, SubmitBtn, IconButton, SubmitIconBtn} from '@components/buttons';
+import {NewGameStore} from '@scenes/games/stores/new-game-store';
+import {GeoPointSetter} from './components/geo-point-setter';
+import {MapService} from 'react-google-maps-ts';
 
-import { InputError } from '@components/inputs/components/input-error/input-error';
-import { observable } from 'mobx';
-import { BorderInfoPopup } from './components/border-info-popup/border-info-popup';
+import {InputError} from '@components/inputs/components/input-error/input-error';
+import {observable} from 'mobx';
+import {BorderInfoPopup} from './components/border-info-popup/border-info-popup';
 
 import styles from './border-form.scss';
 
@@ -21,7 +21,7 @@ export interface BorderFormProps extends RouteComponentProps {
 }
 
 type Props = BorderFormProps & {
-  mapService: MapService
+  mapService: MapService;
 }
 
 @inject('newGameStore')
@@ -45,7 +45,7 @@ export class BorderForm extends Component<Props> {
 
   addDefaultPoint() {
     const {
-      newGameStore, 
+      newGameStore,
       mapService,
     } = this.props;
 
@@ -60,7 +60,7 @@ export class BorderForm extends Component<Props> {
     const {newGameStore} = this.props;
 
     const {
-      newBorderStore
+      newBorderStore,
     } = newGameStore!;
 
     newBorderStore.deletePoint(pointIndex);
@@ -70,7 +70,7 @@ export class BorderForm extends Component<Props> {
     const {newGameStore} = this.props;
 
     const {
-      newBorderStore
+      newBorderStore,
     } = newGameStore!;
 
     newBorderStore.selectPoint(pointIndex);
@@ -80,7 +80,7 @@ export class BorderForm extends Component<Props> {
     const {newGameStore} = this.props;
 
     const {
-      newBorderStore
+      newBorderStore,
     } = newGameStore!;
 
     newBorderStore.resetSelection();
@@ -104,7 +104,7 @@ export class BorderForm extends Component<Props> {
 
   onReset = (e: FormEvent) => {
     e.preventDefault();
-    
+
     const {history} = this.props;
 
     history.push('/games/new');
@@ -142,12 +142,12 @@ export class BorderForm extends Component<Props> {
     const {newGameStore} = this.props;
 
     const {
-      points, 
+      points,
       selectedPointIndex,
       isApplied,
       isPending,
       isValid,
-      error
+      error,
     } = newGameStore!.newBorderStore;
 
     return (
@@ -172,7 +172,7 @@ export class BorderForm extends Component<Props> {
         {!this.isCollapsed && (
           <div className={cx('points-list')}>
             {points.map((pointStore, index) => (
-              <GeoPointSetter 
+              <GeoPointSetter
                 className={cx('point-control')}
                 onChange={this.onChange}
                 onEdit={this.editPoint}
@@ -185,11 +185,11 @@ export class BorderForm extends Component<Props> {
               />
             ))}
             <div>
-              <label 
+              <label
                 htmlFor='add-point-btn'
                 className={cx('add-point-label')}
               >
-                <SubmitIconBtn 
+                <SubmitIconBtn
                   onClick={this.onAddPoint}
                   className={cx('add-point-btn')}
                   id='add-point-btn'
@@ -202,12 +202,12 @@ export class BorderForm extends Component<Props> {
           </div>
         )}
         {error && (
-          <InputError 
+          <InputError
             error={error}
           />
         )}
         {this.isInfoShown && (
-          <BorderInfoPopup 
+          <BorderInfoPopup
             closePopup={this.onCloseInfo}
             className={cx('popup')}
           />
@@ -223,7 +223,7 @@ export class BorderForm extends Component<Props> {
           </div>
           <div className={cx('right-btn-wrapper')}>
             {!isApplied && (
-              <SubmitBtn 
+              <SubmitBtn
                 onClick={this.onApply}
                 disabled={isPending || !isValid}
               >
@@ -231,7 +231,7 @@ export class BorderForm extends Component<Props> {
               </SubmitBtn>
             )}
             {isApplied && (
-              <SubmitBtn 
+              <SubmitBtn
                 type='submit'
                 disabled={isPending}
               >
@@ -241,6 +241,6 @@ export class BorderForm extends Component<Props> {
           </div>
         </div>
       </form>
-    )
+    );
   }
 }

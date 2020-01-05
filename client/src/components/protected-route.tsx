@@ -4,7 +4,7 @@ import {Route, Redirect, RouteProps} from 'react-router-dom';
 interface ProtectedRouteProps extends RouteProps {
   isAllowed: boolean;
   redirectTo: string;
-};
+}
 
 const ProtectedRoute = ({
   isAllowed,
@@ -12,13 +12,13 @@ const ProtectedRoute = ({
   component,
   ...props
 }: ProtectedRouteProps) => isAllowed ? (
-  <Route 
+  <Route
     component={component}
-    {...props} 
+    {...props}
   />
 ) : (
-  <Route 
-    {...props} 
+  <Route
+    {...props}
     render={
       () => (
         <Redirect to={redirectTo} />

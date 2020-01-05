@@ -1,4 +1,4 @@
-import { observable, computed, action } from "mobx";
+import {observable, computed, action} from 'mobx';
 
 export interface FormField<Value = any> {
   validate: () => Promise<void>;
@@ -18,38 +18,38 @@ export class InputsStore {
   inputs: FormField[] = [];
 
   @observable error?: Error;
-  @observable isPending: boolean = false;
+  @observable isPending = false;
 
   validateInputs?: (inputs: FormField[]) => void | Promise<void>;
 
   constructor({
     inputs,
-    validate
+    validate,
   }: InputsStoreProps) {
     this.inputs = inputs;
     this.validateInputs = validate;
   }
 
-  @computed 
-  get isValid() {
+  @computed
+  get isValid(): boolean {
     return !this.error && this.inputs.reduce(
-      (isValid, input) => isValid && input.isValid !== false && !input.isPending, 
-      true
+      (isValid: boolean, input) => isValid && input.isValid !== false && !input.isPending,
+      true,
     );
   }
 
-  setInputs(inputs: FormField[]) {
+  setInputs(inputs: FormField[]): void {
     this.inputs = inputs;
   }
 
   @action
-  async validate() {
+  async validate(): Promise<void | never> {
     let error: Error | undefined;
 
     await Promise.all(
       this.inputs
         .filter(({isValid, debouncePromise}) => isValid === undefined || !!debouncePromise)
-        .map((input) => input.debouncePromise || input.validate())
+        .map((input) => input.debouncePromise || input.validate()),
     );
 
     if (!this.validateInputs) return;
@@ -60,7 +60,7 @@ export class InputsStore {
       if (!(validationPromise instanceof Promise)) return;
 
       this.isPending = true;
-  
+
       await validationPromise;
     } catch (err) {
       error = err;
@@ -73,33 +73,12 @@ export class InputsStore {
     }
   }
 
-  reset() {
+  reset(): void {
     this.inputs.forEach((input) => input.reset());
   }
 
-  refresh() {
+  refresh(): void {
     this.error = undefined;
     this.isPending = false;
-  }
-
-  [Symbol.iterator]() {
-    const {inputs} = this;
-
-    let currentIndex = 0;
-
-    return {
-      next() {
-        if (currentIndex < inputs.length) {
-          return {
-            done: false,
-            value: inputs[currentIndex++]
-          };
-        } else {
-          return {
-            done: true
-          };
-        }
-      }
-    }
   }
 }

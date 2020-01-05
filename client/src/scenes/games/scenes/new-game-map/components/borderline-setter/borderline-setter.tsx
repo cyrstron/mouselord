@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
-import { NewGameStore } from '@scenes/games/stores/new-game-store';
-import { EditableBorderline } from './editable-borderline';
-import { MapBroadcaster } from 'react-google-maps-ts';
-import { GeoPoint } from '@mouselord/grider';
+import React, {Component} from 'react';
+import {inject, observer} from 'mobx-react';
+import {NewGameStore} from '@scenes/games/stores/new-game-store';
+import {EditableBorderline} from './editable-borderline';
+import {MapBroadcaster} from 'react-google-maps-ts';
 
 export interface BorderlineSetterProps {
   newGameStore?: NewGameStore;
@@ -19,7 +18,7 @@ class BorderlineSetter extends Component<BorderlineSetterProps> {
     };
 
     const {newBorderStore} = this.props.newGameStore!;
-    
+
     newBorderStore.insertNearSelected(point);
   }
 
@@ -38,12 +37,12 @@ class BorderlineSetter extends Component<BorderlineSetterProps> {
     return (
       <>
         <EditableBorderline />
-        <MapBroadcaster 
+        <MapBroadcaster
           onRightClick={this.onPointAdd}
           onClick={this.onPointChange}
         />
       </>
-    )
+    );
   }
 }
 

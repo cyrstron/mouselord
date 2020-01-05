@@ -1,19 +1,19 @@
-import React, { Component, FormEvent } from 'react';
-import { RouteComponentProps } from 'react-router';
+import React, {Component, FormEvent} from 'react';
+import {RouteComponentProps} from 'react-router';
 import classnames from 'classnames/bind';
 
-import { CancelBtn, SubmitBtn } from '@components/buttons';
-import { inject, observer } from 'mobx-react';
-import { observable } from 'mobx';
-import { NewGameStore } from '@scenes/games/stores/new-game-store';
-import { InputError } from '@components/inputs/components/input-error/input-error';
+import {CancelBtn, SubmitBtn} from '@components/buttons';
+import {inject, observer} from 'mobx-react';
+import {observable} from 'mobx';
+import {NewGameStore} from '@scenes/games/stores/new-game-store';
+import {InputError} from '@components/inputs/components/input-error/input-error';
 
 import styles from './save-game-form.scss';
-import { GamePayload } from '@state/actions/games-requests/actions';
+import {GamePayload} from '@state/actions/games-requests/actions';
 
 const cx = classnames.bind(styles);
 
-interface SaveGameFormProps extends RouteComponentProps {
+export interface SaveGameFormProps extends RouteComponentProps {
   newGameStore?: NewGameStore;
   createGame: (game: GamePayload) => Promise<string>;
 }
@@ -21,7 +21,7 @@ interface SaveGameFormProps extends RouteComponentProps {
 @inject('newGameStore')
 @observer
 class SaveGameForm extends Component<SaveGameFormProps> {
-  @observable isPending: boolean = false;
+  @observable isPending = false;
   @observable error?: Error;
 
   onSubmit = async (e: FormEvent) => {
@@ -46,7 +46,7 @@ class SaveGameForm extends Component<SaveGameFormProps> {
 
   onReset = (e: FormEvent) => {
     e.preventDefault();
-    
+
     const {history} = this.props;
 
     history.push('/games/border');
@@ -85,7 +85,7 @@ class SaveGameForm extends Component<SaveGameFormProps> {
             </CancelBtn>
           </div>
           <div className={cx('right-btn-wrapper')}>
-            <SubmitBtn 
+            <SubmitBtn
               type='submit'
               disabled={this.isPending}
             >
@@ -94,7 +94,7 @@ class SaveGameForm extends Component<SaveGameFormProps> {
           </div>
         </div>
       </form>
-    )
+    );
   }
 }
 

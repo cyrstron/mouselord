@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames/bind';
-import { NavLink } from '../../../../components/nav-link';
+import {NavLink} from '../../../../components/nav-link';
 
 import styles from './auth-nav-item.scss';
 
@@ -28,6 +28,6 @@ export class AuthNavItem extends Component<AuthNavItemProps> {
           {children}
         </NavLink>
       </li>
-    )
+    );
   }
 }

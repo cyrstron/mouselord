@@ -17,7 +17,7 @@ export class PositionMarker extends Component<MarkerProps> {
 
     this.geolocationStore = props.geolocationStore!;
   }
-  
+
   render() {
     const {position} = this.geolocationStore;
 

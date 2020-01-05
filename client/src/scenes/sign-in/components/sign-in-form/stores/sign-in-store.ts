@@ -1,11 +1,8 @@
-import {action, observable, computed} from 'mobx';
+import {action, computed} from 'mobx';
 import {InputStore} from '@stores/input-store';
-import { InputsStore } from '@stores/inputs-store';
-import { SignInPayload } from '@state/reducers/auth/auth-operations';
+import {InputsStore} from '@stores/inputs-store';
+import {SignInPayload} from '@state/reducers/auth/auth-operations';
 import {emailValidationRegex} from '../../../../../consts';
-
-interface SignInStoreProps {
-}
 
 export class SignInStore {
   email: InputStore<string>;
@@ -16,11 +13,11 @@ export class SignInStore {
   constructor() {
     this.email = new InputStore({
       value: '',
-      validate: this.validateEmail
+      validate: this.validateEmail,
     });
     this.password = new InputStore({
       value: '',
-      validate: this.validatePassword
+      validate: this.validatePassword,
     });
 
     this.inputs = new InputsStore({
@@ -31,19 +28,19 @@ export class SignInStore {
     });
   }
 
-  validateEmail = async (value: string) => {
+  validateEmail = (value: string): void | never => {
     if (!value) throw Error('Email is required field');
 
     if (!emailValidationRegex.test(value)) throw Error('Email is not valid');
   }
 
-  validatePassword = (value: string) => {
+  validatePassword = (value: string): void | never => {
     if (!value) throw Error('Password is required field');
 
     if (value.length < 3) throw Error('Password should have at least 3 characters');
   }
 
-  get isValid() {
+  get isValid(): boolean {
     return this.inputs.isValid;
   }
 
@@ -52,15 +49,15 @@ export class SignInStore {
     return {
       email: this.email.value,
       password: this.password.value,
-    }
+    };
   }
 
-  async validate() {
+  async validate(): Promise<void> {
     await this.inputs.validate();
   }
 
   @action
-  reset() {
+  reset(): void {
     this.inputs.reset();
   }
 }

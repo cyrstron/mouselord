@@ -25,12 +25,12 @@ export const fromDec = (value: number): GeoCoordFormatted => {
 };
 
 export const toDec = ({
-  deg, 
-  min, 
-  sec, 
-  isPositive
-}: GeoCoordFormatted) => {
+  deg,
+  min,
+  sec,
+  isPositive,
+}: GeoCoordFormatted): number => {
   const value = deg + (min / 60) + (sec / 3600);
 
   return isPositive ? value : -value;
-}
+};

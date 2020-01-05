@@ -5,15 +5,15 @@ import {GeoPoint} from '@mouselord/grider';
 interface Props {
   children?: ReactNode;
   fill?: string;
-  bounds: google.maps.LatLngBoundsLiteral,
+  bounds: google.maps.LatLngBoundsLiteral;
 }
 
-const SvgOverlay = ({bounds, children, fill}: Props) => {
-  let {
+const SvgOverlay = ({bounds, children}: Props) => {
+  const {
     east,
     west,
     north,
-    south
+    south,
   } = bounds;
 
   let northWest = new GeoPoint(north, west);
@@ -39,7 +39,7 @@ const SvgOverlay = ({bounds, children, fill}: Props) => {
         height='100%'
         strokeOpacity='0'
         viewBox={`0 0 100 ${relHeight}`}
-        aria-labelledby='title' 
+        aria-labelledby='title'
         fill='none'
       >
         {children}

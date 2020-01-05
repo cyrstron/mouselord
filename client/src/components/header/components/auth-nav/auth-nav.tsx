@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './auth-nav.scss';
-import { UserInfo } from './components/user-info';
-import { AuthNavItem } from './components/auth-nav-item/auth-nav-item';
+import {UserInfo} from './components/user-info';
+import {AuthNavItem} from './components/auth-nav-item/auth-nav-item';
 
 const cx = classNames.bind(styles);
 
@@ -29,8 +29,8 @@ export class AuthNav extends Component<AuthNavProps> {
 
   render() {
     const {
-      isAuthenticated, 
-      isPending, 
+      isAuthenticated,
+      isPending,
       className,
     } = this.props;
 

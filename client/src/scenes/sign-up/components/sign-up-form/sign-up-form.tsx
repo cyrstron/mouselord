@@ -1,18 +1,17 @@
-import React, {Component, FormEvent} from "react";
-import { RouteComponentProps } from "react-router";
+import React, {Component, FormEvent} from 'react';
+import {RouteComponentProps} from 'react-router';
 import classnames from 'classnames/bind';
-import { observer } from "mobx-react";
-import { SignUpStore } from "./stores/sign-up-store";
-import { Input } from "@components/inputs";
+import {observer} from 'mobx-react';
+import {SignUpStore} from './stores/sign-up-store';
+import {Input} from '@components/inputs';
 
-import { SubmitBtn, CancelBtn } from "@components/buttons";
+import {SubmitBtn, CancelBtn} from '@components/buttons';
 
 import styles from './sign-up-form.scss';
 
 const cx = classnames.bind(styles);
 
-export interface SignUpProps extends RouteComponentProps {
-}
+export type SignUpProps = RouteComponentProps;
 
 @observer
 class SignUpForm extends Component<SignUpProps> {
@@ -55,7 +54,7 @@ class SignUpForm extends Component<SignUpProps> {
       <div className={cx('form')}>
         {isPending && 'Loading...'}
         {error && error.message}
-        <form 
+        <form
           onSubmit={this.onSubmit}
           onReset={this.onReset}
         >
@@ -64,20 +63,20 @@ class SignUpForm extends Component<SignUpProps> {
             title='Email:'
             inputStore={email}
             id='signup-email-field'
-          />          
+          />
           <Input
             className={cx('input')}
             title='Name:'
             inputStore={name}
             id='signup-name-field'
-          />        
+          />
           <Input
             className={cx('input')}
             title='Password:'
             inputStore={password}
             type='password'
             id='signup-password-field'
-          />        
+          />
           <Input
             className={cx('input')}
             title='Confirm password:'

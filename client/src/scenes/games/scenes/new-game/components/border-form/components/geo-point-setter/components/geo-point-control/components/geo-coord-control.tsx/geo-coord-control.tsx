@@ -1,17 +1,17 @@
-import React, { 
-  ReactNode, 
-  Component, 
+import React, {
+  ReactNode,
+  Component,
   createRef,
   RefObject,
 } from 'react';
 import classnames from 'classnames/bind';
-import { observable } from 'mobx';
-import { InputStore } from '@stores/input-store';
-import { fromDec, toDec } from '../../../../services/format-coord';
+import {observable} from 'mobx';
+import {InputStore} from '@stores/input-store';
+import {fromDec, toDec} from '../../../../services/format-coord';
 
 import styles from './geo-coord-control.scss';
-import { observer } from 'mobx-react';
-import { InputError } from '@components/inputs/components/input-error/input-error';
+import {observer} from 'mobx-react';
+import {InputError} from '@components/inputs/components/input-error/input-error';
 
 const cx = classnames.bind(styles);
 
@@ -61,7 +61,7 @@ class GeoCoordControl extends Component<GeoCoordProps> {
 
     const {
       inputStore,
-      onChange
+      onChange,
     } = this.props;
 
     if (value.toFixed(9) === inputStore.value.toFixed(9)) return;
@@ -75,14 +75,14 @@ class GeoCoordControl extends Component<GeoCoordProps> {
 
   validateDeg(value: number) {
     const {isLat} = this.props;
-    
+
     if (value % 1 !== 0) {
       throw new Error('Degrees should be integer');
     }
 
     if (isLat && value > 90) {
       throw new Error('Latitude can\'t be bigger than 90°');
-    } else if (isLat && value < -90) {      
+    } else if (isLat && value < -90) {
       throw new Error('Latitude can\'t be less than -90°');
     } else if (value > 180) {
       throw new Error('Longitude can\'t be bigger than 180°');
@@ -115,7 +115,7 @@ class GeoCoordControl extends Component<GeoCoordProps> {
 
     if (isLat && deg === 90) {
       throw new Error('Latitude can\'t be bigger than 90°');
-    } else if (isLat && deg === - 90) {      
+    } else if (isLat && deg === - 90) {
       throw new Error('Latitude can\'t be less than -90°');
     } else if (deg === 180) {
       throw new Error('Longitude can\'t be bigger than 180°');
@@ -144,7 +144,7 @@ class GeoCoordControl extends Component<GeoCoordProps> {
 
     if (isLat && deg === 90) {
       throw new Error('Latitude can\'t be bigger than 90°');
-    } else if (isLat && deg === - 90) {      
+    } else if (isLat && deg === - 90) {
       throw new Error('Latitude can\'t be less than -90°');
     } else if (deg === 180) {
       throw new Error('Longitude can\'t be bigger than 180°');
@@ -177,16 +177,16 @@ class GeoCoordControl extends Component<GeoCoordProps> {
     return (
       <div className={cx('geo-coord-control', className)}>
         {title}
-        <div 
+        <div
           className={cx('control-wrapper', {
             'is-invalid': error,
             'is-valid': inputStore.isValid,
           })}
         >
           <label className={cx('deg-control')}>
-            <input 
+            <input
               ref={this.degRef}
-              className={cx('deg-input')} 
+              className={cx('deg-input')}
               type="number"
               name='deg'
               onChange={this.onChange}
@@ -198,9 +198,9 @@ class GeoCoordControl extends Component<GeoCoordProps> {
             °
           </label>
           <label className={cx('min-control')}>
-            <input 
+            <input
               ref={this.minRef}
-              className={cx('min-input')} 
+              className={cx('min-input')}
               type="number"
               name='min'
               onChange={this.onChange}
@@ -212,9 +212,9 @@ class GeoCoordControl extends Component<GeoCoordProps> {
             '
           </label>
           <label className={cx('sec-control')}>
-            <input 
+            <input
               ref={this.secRef}
-              className={cx('sec-input')} 
+              className={cx('sec-input')}
               type="number"
               onChange={this.onChange}
               value={sec}
@@ -227,8 +227,8 @@ class GeoCoordControl extends Component<GeoCoordProps> {
           </label>
         </div>
         {error && (
-          <InputError 
-            error={error} 
+          <InputError
+            error={error}
             className={cx('error')}
           />
         )}

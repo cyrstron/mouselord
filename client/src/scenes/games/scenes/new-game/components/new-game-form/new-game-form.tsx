@@ -1,14 +1,14 @@
-import React, { Component, FormEvent } from 'react';
-import { RouteComponentProps } from 'react-router';
+import React, {Component, FormEvent} from 'react';
+import {RouteComponentProps} from 'react-router';
 import classnames from 'classnames/bind';
-import { Input, Textarea, Select, Checkbox } from '@components/inputs';
-import { NewGameFormStore } from './stores/new-game-form-store';
+import {Input, Textarea, Select, Checkbox} from '@components/inputs';
+import {NewGameFormStore} from './stores/new-game-form-store';
 
 import styles from './new-game-form.scss';
-import { CancelBtn, SubmitBtn } from '@components/buttons';
-import { inject, observer } from 'mobx-react';
-import { observable } from 'mobx';
-import { NewGameStore } from '@scenes/games/stores/new-game-store';
+import {CancelBtn, SubmitBtn} from '@components/buttons';
+import {inject, observer} from 'mobx-react';
+import {observable} from 'mobx';
+import {NewGameStore} from '@scenes/games/stores/new-game-store';
 
 const cx = classnames.bind(styles);
 
@@ -19,7 +19,7 @@ interface NewGameFormProps extends RouteComponentProps {
 @inject('newGameStore')
 @observer
 export class NewGameForm extends Component<NewGameFormProps> {
-  @observable isApplied: boolean = false;
+  @observable isApplied = false;
 
   newGameFormStore: NewGameFormStore;
 
@@ -69,7 +69,7 @@ export class NewGameForm extends Component<NewGameFormProps> {
 
   onReset = (e: FormEvent) => {
     e.preventDefault();
-    
+
     const {history, newGameStore} = this.props;
 
     newGameStore!.reset();
@@ -101,14 +101,14 @@ export class NewGameForm extends Component<NewGameFormProps> {
           Choose proper name and description for your game
         </h3>
         <div className={cx('game-settings')}>
-          <Input 
+          <Input
             onChange={this.onChange}
             className={cx('input')}
             id='name'
             title='Game name:'
-            inputStore={name} 
+            inputStore={name}
           />
-          <Textarea 
+          <Textarea
             id='description'
             onChange={this.onChange}
             className={cx('input', 'description-input')}
@@ -117,35 +117,35 @@ export class NewGameForm extends Component<NewGameFormProps> {
           />
         </div>
         <div className={cx('grid-settings')}>
-          <Select 
+          <Select
             onChange={this.onChange}
             id='correction'
             className={cx('input', 'grid-select')}
             title='Correction:'
-            inputStore={correction} 
+            inputStore={correction}
           >
             <option value='merc'>Mercator</option>
             <option value='none'>None</option>
           </Select>
-          <Select 
+          <Select
             onChange={this.onChange}
             id='grid-type'
             className={cx('input', 'grid-select')}
             title='Grid type:'
-            inputStore={gridType} 
+            inputStore={gridType}
           >
             <option value='hex'>Hexagonal</option>
             <option value='rect'>Rectangular</option>
           </Select>
-          <Input 
+          <Input
             onChange={this.onChange}
             className={cx('input', 'cell-size-input')}
             id='cell-size'
             title='Cell size:'
             type='number'
-            inputStore={cellSize} 
+            inputStore={cellSize}
           />
-          <Checkbox 
+          <Checkbox
             onChange={this.onChange}
             id='orientation'
             className={cx('input', 'horizontal-input')}
@@ -163,7 +163,7 @@ export class NewGameForm extends Component<NewGameFormProps> {
           </div>
           <div className={cx('right-btn-wrapper')}>
             {!this.isApplied && (
-              <SubmitBtn 
+              <SubmitBtn
                 onClick={this.onApply}
               >
                 Apply
@@ -177,6 +177,6 @@ export class NewGameForm extends Component<NewGameFormProps> {
           </div>
         </div>
       </form>
-    )
+    );
   }
 }

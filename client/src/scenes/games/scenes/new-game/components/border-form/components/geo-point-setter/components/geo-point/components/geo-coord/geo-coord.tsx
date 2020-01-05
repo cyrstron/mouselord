@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
+import React, {ReactNode} from 'react';
 import classnames from 'classnames/bind';
-import { fromDec } from '../../../../services/format-coord';
+import {fromDec} from '../../../../services/format-coord';
 
 import styles from './geo-coord.scss';
 
@@ -13,9 +13,9 @@ export interface GeoCoordProps {
 }
 
 const GeoCoord = ({
-  value, 
-  title, 
-  className
+  value,
+  title,
+  className,
 }: GeoCoordProps) => {
   const {
     isPositive,
@@ -37,6 +37,6 @@ const GeoCoord = ({
       </div>
     </div>
   );
-}
+};
 
 export {GeoCoord};

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Marker, withGoogleApi } from 'react-google-maps-ts';
-import { GeoPointStore } from '@scenes/games/stores/point-store';
-import { observer } from 'mobx-react';
+import React, {Component} from 'react';
+import {Marker, withGoogleApi} from 'react-google-maps-ts';
+import {GeoPointStore} from '@scenes/games/stores/point-store';
+import {observer} from 'mobx-react';
 
 export interface PointSetterProps {
   pointStore: GeoPointStore;
@@ -29,21 +29,21 @@ class PointSetterComponent extends Component<Props> {
     this.pointIcon = {
       path: googleApi.maps.SymbolPath.CIRCLE,
       scale: 8,
-      fillColor: "#02d",
-      strokeColor: "#333",
+      fillColor: '#02d',
+      strokeColor: '#333',
       fillOpacity: 0.65,
       strokeOpacity: 1,
-      strokeWeight: 5
+      strokeWeight: 5,
     };
 
     this.selectedPointIcon = {
       path: googleApi.maps.SymbolPath.CIRCLE,
       scale: 10,
-      fillColor: "#d20",
-      strokeColor: "#0a0",
+      fillColor: '#d20',
+      strokeColor: '#0a0',
       fillOpacity: 0.65,
       strokeOpacity: 0.75,
-      strokeWeight: 10
+      strokeWeight: 10,
     };
   }
 
@@ -86,7 +86,7 @@ class PointSetterComponent extends Component<Props> {
     } = this.props;
 
     return (
-      <Marker 
+      <Marker
         icon={isSelected ? this.selectedPointIcon : this.pointIcon}
         title={`Border point #${index}`}
         position={value}
@@ -102,6 +102,6 @@ class PointSetterComponent extends Component<Props> {
   }
 }
 
-const PointSetter = withGoogleApi<PointSetterProps>(PointSetterComponent)
+const PointSetter = withGoogleApi<PointSetterProps>(PointSetterComponent);
 
-export {PointSetter}
+export {PointSetter};

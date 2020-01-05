@@ -13,57 +13,58 @@ import {
   SIGN_OUT,
 } from './auth-consts';
 
-import { User } from '@state/actions/users-requests/actions';
+import {User} from '@state/actions/users-requests/actions';
+import {Action} from '@state/index';
 
-export const signUpOnPending = () => ({
+export const signUpOnPending = (): Action => ({
   type: SIGN_UP_PENDING,
 });
 
-export const signUpOnSuccess = () => ({
+export const signUpOnSuccess = (): Action => ({
   type: SIGN_UP_SUCCESS,
 });
 
-export const signUpOnFailure = (err: Error) => ({
+export const signUpOnFailure = (err: Error): Action => ({
   type: SIGN_UP_FAILURE,
   payload: err,
 });
 
-export const signInOnPending = () => ({
+export const signInOnPending = (): Action => ({
   type: SIGN_IN_PENDING,
 });
 
-export const signInOnSuccess = (authToken: string) => ({
+export const signInOnSuccess = (authToken: string): Action => ({
   type: SIGN_IN_SUCCESS,
   payload: authToken,
 });
 
-export const signInOnFailure = (err: Error) => ({
+export const signInOnFailure = (err: Error): Action => ({
   type: SIGN_IN_FAILURE,
   payload: err,
 });
 
-export const getCurrentUserOnPending = () => ({
+export const getCurrentUserOnPending = (): Action => ({
   type: GET_CURRENT_USER_PENDING,
 });
 
-export const getCurrentUserOnSuccess = (user: User) => ({
+export const getCurrentUserOnSuccess = (user: User): Action => ({
   type: GET_CURRENT_USER_SUCCESS,
   payload: user,
 });
 
-export const getCurrentUserOnFailure = (err: Error) => ({
+export const getCurrentUserOnFailure = (err: Error): Action => ({
   type: GET_CURRENT_USER_FAILURE,
   payload: err,
 });
 
-export const validateTokenOnPending = () => ({
+export const validateTokenOnPending = (): Action => ({
   type: VALIDATE_TOKEN_PENDING,
 });
 
-export const validateTokenOnSuccess = () => ({
+export const validateTokenOnSuccess = (): Action => ({
   type: VALIDATE_TOKEN_SUCCESS,
 });
 
-export const signOut = () => ({
+export const signOut = (): Action => ({
   type: SIGN_OUT,
 });

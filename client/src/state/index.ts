@@ -5,7 +5,7 @@ import {
   Store,
 } from 'redux';
 
-import thunk, { ThunkDispatch } from 'redux-thunk';
+import thunk, {ThunkDispatch} from 'redux-thunk';
 
 import {
   AuthState,
@@ -14,10 +14,10 @@ import {
 } from './reducers/auth';
 
 import {rootReducer, RootState} from './reducers/root';
-import {gamesReducer, GamesState } from './reducers/games';
+import {gamesReducer, GamesState} from './reducers/games';
 
 export interface Action<
-  Type = string, 
+  Type = string,
   Payload = any
 > {
   type: Type;
@@ -40,8 +40,6 @@ export const configureStore = (): Store<AppState, Action> => createStore(
   }),
   applyMiddleware(
     thunk,
-    // handleApiRequest,
-    // handleHttpRequest,
-    ...authMiddlewares
+    ...authMiddlewares,
   ),
 );

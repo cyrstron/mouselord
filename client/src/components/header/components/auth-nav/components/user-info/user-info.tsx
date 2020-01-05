@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames/bind';
-import { User } from '@state/actions/users-requests/actions';
-import { CancelBtn } from '@components/buttons';
+import {User} from '@state/actions/users-requests/actions';
+import {CancelBtn} from '@components/buttons';
 
 import styles from './user-info.scss';
 
@@ -18,8 +18,8 @@ export interface UserInfoProps {
 export class UserInfoComponent extends Component<UserInfoProps> {
   async componentDidMount() {
     const {
-      getCurrentUser, 
-      currentUser
+      getCurrentUser,
+      currentUser,
     } = this.props;
 
     if (currentUser) return;
@@ -35,7 +35,7 @@ export class UserInfoComponent extends Component<UserInfoProps> {
 
   render() {
     const {
-      isPending, 
+      isPending,
       currentUser,
       error,
     } = this.props;
@@ -52,18 +52,18 @@ export class UserInfoComponent extends Component<UserInfoProps> {
           <div className={cx('user-desc')}>
             Hello, {currentUser.name}!
           </div>
-          <CancelBtn 
+          <CancelBtn
             className={cx('sign-out-btn')}
             onClick={this.onSignOut}
           >
             Sign Out
           </CancelBtn>
         </div>
-        <img 
+        <img
           className={cx('user-icon')}
           src="/static/user.svg"
         />
       </div>
-    )
+    );
   }
 }

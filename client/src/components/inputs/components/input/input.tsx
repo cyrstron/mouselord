@@ -1,15 +1,15 @@
-import React, { InputHTMLAttributes, Component, ChangeEvent, ReactNode } from 'react';
+import React, {InputHTMLAttributes, Component, ChangeEvent, ReactNode} from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './input.scss';
-import { InputStore } from '@stores/input-store';
-import { observer } from 'mobx-react';
-import { InputError } from '../input-error/input-error';
+import {InputStore} from '@stores/input-store';
+import {observer} from 'mobx-react';
+import {InputError} from '../input-error/input-error';
 
 const cx = classNames.bind(styles);
 
 export interface InputProps extends Omit<
-  InputHTMLAttributes<HTMLInputElement>, 
+  InputHTMLAttributes<HTMLInputElement>,
   'value' | 'title'
 > {
   title: ReactNode;
@@ -42,16 +42,16 @@ export class Input extends Component<InputProps, {}> {
       title,
       ...props
     } = this.props;
-  
+
     return (
-      <div      
+      <div
         className={cx('control', className, {
           'is-invalid': isValid === false,
           'is-valid': isValid && isTouched,
           'is-pending': isPending,
         })}
       >
-        <label 
+        <label
           htmlFor={id}
           className={cx('label')}
         >
@@ -66,11 +66,11 @@ export class Input extends Component<InputProps, {}> {
             className={cx('input')}
           />
         </span>
-        <InputError 
+        <InputError
           className={cx('error')}
-          error={error} 
+          error={error}
         />
       </div>
-    )
+    );
   }
 }

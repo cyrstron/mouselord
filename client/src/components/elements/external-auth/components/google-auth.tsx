@@ -32,7 +32,7 @@ export class GoogleLogin extends Component<GoogleLoginProps> {
 
     window.gapi.load('auth2', () => {
       this.auth2 = gapi.auth2.init({
-        client_id: clientId,
+        'client_id': clientId,
       });
 
       window.gapi.load('signin2', () => {

@@ -10,7 +10,7 @@ interface FacebookLoginProps {
   className?: string;
   appId: string;
   onSuccess: (
-    authResponce: fb.AuthResponse, 
+    authResponce: fb.AuthResponse,
     user: FacebookUser
   ) => void;
   onFailure?: (reason: { error: string }) => void;
@@ -25,14 +25,14 @@ declare global {
 
 export class FacebookLogin extends Component<FacebookLoginProps> {
   script?: HTMLScriptElement;
-  isConnected: boolean = false;
+  isConnected = false;
 
   async componentDidMount() {
     const {
       appId,
     } = this.props;
 
-    await new Promise((res, rej) => {   
+    await new Promise((res, rej) => {
       this.script = document.createElement('script');
       this.script.src = `http://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=${appId}&autoLogAppEvents=1`;
       this.script.onerror = rej;
@@ -60,7 +60,7 @@ export class FacebookLogin extends Component<FacebookLoginProps> {
     const user = await new Promise<FacebookUser>((res) => {
       window.FB.api('/me?fields=name,id,email', res);
     });
-    
+
     onSuccess(response.authResponse, user);
   }
 
@@ -83,11 +83,11 @@ export class FacebookLogin extends Component<FacebookLoginProps> {
     return (
       <div className={className}>
         <div
-          className="fb-login-button" 
+          className="fb-login-button"
           data-width="220"
-          data-size="large" 
-          data-button-type="login_with" 
-          data-auto-logout-link="false" 
+          data-size="large"
+          data-button-type="login_with"
+          data-auto-logout-link="false"
           data-use-continue-as="false"
           data-scope="public_profile, email"
           data-onlogin='checkFacebookLogin'

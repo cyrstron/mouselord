@@ -1,0 +1,86 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "google"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
+  "env": {
+    "commonjs": true,
+    "node": true
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "parser": "@typescript-eslint/parser",  
+      "settings": {},
+      "extends": [
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "google"
+      ],
+      "rules": {
+        "no-invalid-this": 0,
+        "require-jsdoc": 0,
+        "max-len": ["error", {
+          "code": 100,
+          "ignoreComments": true,
+          "ignoreTrailingComments": true,
+          "ignoreStrings": true,
+          "ignoreRegExpLiterals": true,
+          "ignoreUrls": true
+        }],
+        "indent": ["error", 2],
+        "no-unsafe-finally": 0,
+        "@typescript-eslint/no-explicit-any": 0,
+        "linebreak-style": 0,
+        "@typescript-eslint/no-non-null-assertion": 0
+      }
+    },
+    {
+      "files": ["*.tsx"],
+      "extends": [
+        "plugin:react/recommended"
+      ],
+      "rules": {
+        "no-unused-vars": [
+          "error",
+          {
+            "ignoreRestSiblings": true
+          }
+        ],
+        "react/no-unescaped-entities": 0,
+        "react/jsx-indent-props": [
+          "error",
+          2
+        ],
+        "react/jsx-closing-bracket-location": [
+          "error"
+        ],
+        "react/jsx-wrap-multilines": [
+          "error",
+          {
+            "declaration": "parens-new-line",
+            "assignment": "parens-new-line",
+            "return": "parens-new-line",
+            "arrow": "parens-new-line",
+            "condition": "ignore",
+            "logical": "ignore",
+            "prop": "ignore"
+          }
+        ],
+        "@typescript-eslint/explicit-function-return-type": 0
+      }
+    }
+  ]
+}

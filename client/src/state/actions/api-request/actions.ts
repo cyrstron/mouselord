@@ -1,50 +1,50 @@
-import { 
+import {
   HttpRequestOptions,
   RequestOptions,
-  httpRequest
-} from "../http-request/actions";
-import { AppState } from "@state/index";
-import { selectAuthToken } from "@state/reducers/auth/auth-selectors";
+  httpRequest,
+} from '../http-request/actions';
+import {AppState} from '@state/index';
+import {selectAuthToken} from '@state/reducers/auth/auth-selectors';
 
 export const apiRequest = <Response>(
   options: HttpRequestOptions,
   getState: () => AppState,
-) => httpRequest<Response>({
+): Promise<Response> => httpRequest<Response>({
   ...options,
   headers: {
     ...options.headers,
-    authorization: selectAuthToken(getState())
-  }
+    authorization: selectAuthToken(getState()),
+  },
 });
 
-export const getApiRequest = <Response>(  
+export const getApiRequest = <Response>(
   options: RequestOptions,
   getState: () => AppState,
-) => apiRequest<Response>({
+): Promise<Response> => apiRequest<Response>({
   ...options,
-  method: 'GET'
+  method: 'GET',
 }, getState);
 
-export const postApiRequest = <Response>(  
+export const postApiRequest = <Response>(
   options: HttpRequestOptions,
   getState: () => AppState,
-) => apiRequest<Response>({
+): Promise<Response> => apiRequest<Response>({
   ...options,
-  method: 'POST'
+  method: 'POST',
 }, getState);
 
-export const putApiRequest = <Response>(  
+export const putApiRequest = <Response>(
   options: HttpRequestOptions,
   getState: () => AppState,
-) => apiRequest<Response>({
+): Promise<Response> => apiRequest<Response>({
   ...options,
-  method: 'PUT'
+  method: 'PUT',
 }, getState);
 
-export const deleteApiRequest = <Response>(  
+export const deleteApiRequest = <Response>(
   options: RequestOptions,
   getState: () => AppState,
-) => apiRequest<Response>({
+): Promise<Response> => apiRequest<Response>({
   ...options,
-  method: 'DELETE'
+  method: 'DELETE',
 }, getState);

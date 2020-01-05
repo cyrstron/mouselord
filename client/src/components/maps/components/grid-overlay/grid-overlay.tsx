@@ -2,17 +2,17 @@ import React, {Component} from 'react';
 import {TilesOverlay} from 'react-google-maps-ts';
 import {GridTile} from '../grid-tile/grid-tile';
 import {
-  TileMercPoint, 
-  IndexatedFigure, 
-  GridParams, 
-  MapGridTile, 
-  Point
+  TileMercPoint,
+  IndexatedFigure,
+  GridParams,
+  MapGridTile,
+  Point,
 } from '@mouselord/grider';
-import { CacheService } from '@services/cache-service';
+import {CacheService} from '@services/cache-service';
 
 interface Props {
   params?: GridParams;
-  borderline?: IndexatedFigure,
+  borderline?: IndexatedFigure;
 }
 
 interface TileData {
@@ -21,23 +21,24 @@ interface TileData {
 }
 
 interface GridTilePayload {
-  tileCoord: google.maps.Point,
-  zoom: number,
-  width: number,
-  height: number,
+  tileCoord: google.maps.Point;
+  zoom: number;
+  width: number;
+  height: number;
 }
 
 export class GridOverlay extends Component<Props> {
   tilesCache: CacheService<TileData> = new CacheService({
     minSize: 500,
-    maxSize: 1000
+    maxSize: 1000,
   });
 
-  componentWillUpdate(prevProps: Props) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillUpdate(prevProps: Props) {
     const {params, borderline} = this.props;
 
     if (
-      params === prevProps.params && 
+      params === prevProps.params &&
       borderline === prevProps.borderline
     ) return;
 
@@ -45,12 +46,12 @@ export class GridOverlay extends Component<Props> {
   }
 
   extendPayload = async ({
-    tileCoord: {x, y}, 
+    tileCoord: {x, y},
     zoom,
     width,
     height,
   }: GridTilePayload): Promise<any> => {
-    const {params, borderline} = this.props;    
+    const {params, borderline} = this.props;
 
     if (!params) return;
 
@@ -81,7 +82,7 @@ export class GridOverlay extends Component<Props> {
       console.error(err);
     }
   }
-  
+
   render() {
     const {
       params,
@@ -100,17 +101,17 @@ export class GridOverlay extends Component<Props> {
 
           const tilePoint = TileMercPoint.fromTile(x, y, width, height, zoom);
           const {mapTile, border} = data as TileData;
-          
+
           return (
-            <GridTile 
+            <GridTile
               tilePoint={tilePoint}
               params={params}
               mapTile={mapTile}
               border={border}
             />
-          )
+          );
         }}
       </TilesOverlay>
-    )
+    );
   }
 }

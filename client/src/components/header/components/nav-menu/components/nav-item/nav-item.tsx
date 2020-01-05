@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames/bind';
-import { NavLink } from '../../../../components/nav-link';
+import {NavLink} from '../../../../components/nav-link';
 
 import styles from './nav-item.scss';
 
@@ -31,6 +31,6 @@ export class NavItem extends Component<NavItemProps> {
           {children}
         </NavLink>
       </li>
-    )
+    );
   }
 }

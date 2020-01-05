@@ -1,13 +1,13 @@
 import classNames from 'classnames/bind';
-import React, { Component, createRef, createContext } from 'react';
+import React, {Component, createRef, createContext, ReactNode} from 'react';
 import {Route, Switch} from 'react-router-dom';
 
-import { AuthRoute } from '@components/auth-route';
-import { Header } from '@components/header';
-import { SignUp } from '@scenes/sign-up';
-import { SignIn } from '@scenes/sign-in';
-import { Games } from '@scenes/games';
-import { Home } from '@scenes/home';
+import {AuthRoute} from '@components/auth-route';
+import {Header} from '@components/header';
+import {SignUp} from '@scenes/sign-up';
+import {SignIn} from '@scenes/sign-in';
+import {Games} from '@scenes/games';
+import {Home} from '@scenes/home';
 
 import styles from './app.scss';
 
@@ -16,20 +16,20 @@ const cx = classNames.bind(styles);
 export const PopupContext = createContext<HTMLDivElement | undefined>(undefined);
 
 interface AppState {
-  popupContainer?: HTMLDivElement; 
+  popupContainer?: HTMLDivElement;
 }
 
 class App extends Component<{}, AppState> {
   state: AppState = {};
 
-  componentDidMount() {
+  componentDidMount(): void {
     const {current} = this.popupRef;
 
     if (!current) return;
 
-    this.setState({ popupContainer: current})
+    this.setState({popupContainer: current});
   }
-  
+
   popupRef = createRef<HTMLDivElement>();
 
   render() {
@@ -44,9 +44,9 @@ class App extends Component<{}, AppState> {
               <Switch>
                 <Route path='/sign-up' component={SignUp} />
                 <Route path='/sign-in' component={SignIn} />
-                <AuthRoute 
-                  path='/games' 
-                  render={() => (
+                <AuthRoute
+                  path='/games'
+                  render={(): ReactNode => (
                     <Games className={cx('games')} />
                   )}
                 />

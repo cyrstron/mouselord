@@ -1,26 +1,26 @@
-import { AppState } from "@state/index";
-import { Game } from "@state/actions/games-requests/actions";
+import {AppState} from '@state/index';
+import {Game} from '@state/actions/games-requests/actions';
 
 export const selectCurrentGame = (
-  state: AppState
+  state: AppState,
 ): Game | undefined => state.games.currentGame;
 
 export const selectGames = (
-  state: AppState
+  state: AppState,
 ): Game[] => state.games.games;
 
 export const selectCurrentGamePending = (
-  state: AppState
+  state: AppState,
 ): boolean => state.games.isPending;
 
 export const selectGamesPending = (
-  state: AppState
+  state: AppState,
 ): boolean => state.games.isPending;
 
 export const selectCurrentGameError = (
-  state: AppState
+  state: AppState,
 ): Error | undefined => state.games.error;
 
 export const selectGamesError = (
-  state: AppState
+  state: AppState,
 ): Error | undefined => state.games.error;

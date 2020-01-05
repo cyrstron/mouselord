@@ -11,7 +11,7 @@ export class CacheService<StoredData> {
   maxSize: number;
   minSize: number;
 
-  size: number = 0;
+  size = 0;
 
   constructor({
     minSize,
@@ -26,13 +26,13 @@ export class CacheService<StoredData> {
     this.size += 1;
     this.calls[key] = 1;
     this.lastCalls[key] = Date.now();
-    
+
     if (this.size < this.maxSize) return;
 
     this.clean();
   }
 
-  delete(key: string) {
+  delete(key: string): void {
     const result = this.storage[key];
 
     if (!result) return;
@@ -44,7 +44,7 @@ export class CacheService<StoredData> {
     this.size -= 1;
   }
 
-  clean() {
+  clean(): void {
     const keysByCalls = Object.keys(this.storage)
       .sort((keyA, keyB) => {
         const lastCallA = this.lastCalls[keyA];
@@ -67,11 +67,11 @@ export class CacheService<StoredData> {
 
     this.calls[key] += 1;
     this.lastCalls[key] = Date.now();
-    
+
     return result;
   }
 
-  reset() {
+  reset(): void {
     this.storage = {};
     this.lastCalls = {};
     this.calls = {};

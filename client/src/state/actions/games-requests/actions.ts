@@ -1,5 +1,5 @@
-import { getApiRequest, postApiRequest } from "../api-request/actions";
-import { AppState } from "@state/index";
+import {getApiRequest, postApiRequest} from '../api-request/actions';
+import {AppState} from '@state/index';
 
 export interface GamePayload {
   description?: string;
@@ -13,25 +13,31 @@ export interface Game extends GamePayload {
   createdBy: {
     _id: string;
     name: string;
-  }
+  };
 }
 
-export const getGameById = (gameId: string, getState: () => AppState) => getApiRequest<Game>(
+export const getGameById = (
+  gameId: string,
+  getState: () => AppState,
+): Promise<Game> => getApiRequest<Game>(
   {url: `/api/games/${gameId}`},
-  getState
+  getState,
 );
 
-export const getAllGames = (getState: () => AppState) => getApiRequest<Game[]>(
+export const getAllGames = (
+  getState: () => AppState,
+): Promise<Game[]> => getApiRequest<Game[]>(
   {url: '/api/games'},
-  getState
+  getState,
 );
 
 export const createGame = (
-  data: GamePayload, 
-  getState: () => AppState
-) => postApiRequest<{_id: string}>({
-    url: '/api/games', 
-    data
+  data: GamePayload,
+  getState: () => AppState,
+): Promise<{_id: string}> => postApiRequest<{_id: string}>(
+  {
+    url: '/api/games',
+    data,
   },
-  getState
+  getState,
 );

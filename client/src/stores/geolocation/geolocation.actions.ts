@@ -1,6 +1,6 @@
 export class GeolocationActions {
   watchPosition(
-    positionWatcher: (position: Position) => void ,
+    positionWatcher: (position: Position) => void,
     errorHandler: (position: PositionError) => void,
     options: PositionOptions,
   ): number {

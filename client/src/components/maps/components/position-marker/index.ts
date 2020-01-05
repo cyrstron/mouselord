@@ -1,1 +1,1 @@
-export { PositionMarker } from './position-marker';
+export {PositionMarker} from './position-marker';

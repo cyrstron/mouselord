@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames/bind';
-import { LinkProps } from 'react-router-dom';
-import { ActiveLink } from '@components/elements/links';
+import {LinkProps} from 'react-router-dom';
+import {ActiveLink} from '@components/elements/links';
 
 import styles from './nav-link.scss';
 

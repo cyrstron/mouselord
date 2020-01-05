@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import classnames from 'classnames/bind';
 import navItems from './nav-items.json';
-import { NavItem } from './components/nav-item';
+import {NavItem} from './components/nav-item';
 
 import styles from './nav-menu.scss';
-import { RouteComponentProps } from 'react-router';
 
 const cx = classnames.bind(styles);
 
@@ -23,13 +22,13 @@ export class NavMenu extends Component<NavMenuProps> {
             <NavItem
               key={props.to}
               className={cx('nav-item')}
-              {...props} 
+              {...props}
             >
               {title}
             </NavItem>
           ))}
         </ul>
       </nav>
-    )
+    );
   }
 }

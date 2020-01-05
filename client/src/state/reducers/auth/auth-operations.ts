@@ -10,24 +10,28 @@ import {
   validateTokenOnSuccess,
   signOut,
 } from './auth-actions';
-import { getCurrentUserRequest, getUserByGoogle, getUserByFacebook } from '@state/actions/users-requests/actions';
-import { 
-  signInRequest, 
+import {
+  getCurrentUserRequest,
+  getUserByGoogle,
+  getUserByFacebook,
+} from '@state/actions/users-requests/actions';
+import {
+  signInRequest,
   validateTokenRequest,
   GoogleAuthData,
-  FacebookAuthData
+  FacebookAuthData,
 } from '@state/actions/auth-request/actions';
-import { AppState } from '@state/index';
+import {AppState} from '@state/index';
 
 export const getCurrentUser = () => async (
-  dispatch: Dispatch, 
-  getState: () => AppState
-) => {
+  dispatch: Dispatch,
+  getState: () => AppState,
+): Promise<void> => {
   const onPending = getCurrentUserOnPending();
 
   dispatch(onPending);
 
-  try {    
+  try {
     const currentUser = await getCurrentUserRequest(getState);
 
     const onSuccess = getCurrentUserOnSuccess(currentUser);
@@ -38,7 +42,7 @@ export const getCurrentUser = () => async (
 
     dispatch(onFailure);
   }
-}
+};
 
 interface DefaultSignInPayload {
   email: string;
@@ -48,8 +52,8 @@ interface DefaultSignInPayload {
 export type SignInPayload = DefaultSignInPayload | GoogleAuthData | FacebookAuthData;
 
 export const signIn = (user: SignInPayload) => async (
-  dispatch: Dispatch
-) => {
+  dispatch: Dispatch,
+): Promise<void> => {
   const onPending = signInOnPending();
 
   dispatch(onPending);
@@ -68,32 +72,32 @@ export const signIn = (user: SignInPayload) => async (
 };
 
 export const signInWithGoogle = (googleToken: string) => async (
-  dispatch: Dispatch
-) => {
+  dispatch: Dispatch,
+): Promise<void> => {
   const user = await getUserByGoogle(googleToken);
 
   if (user) {
     await signIn({googleToken})(dispatch);
   }
-}
+};
 
 export const signInWithFacebook = (
-  email: string, 
-  facebookToken: string
+  email: string,
+  facebookToken: string,
 ) => async (
-  dispatch: Dispatch
-) => {
+  dispatch: Dispatch,
+): Promise<void> => {
   const user = await getUserByFacebook(email, facebookToken);
 
   if (user) {
     await signIn({email, facebookToken})(dispatch);
   }
-}
+};
 
 export const validateToken = () => async (
-  dispatch: Dispatch, 
-  getState: () => AppState
-) => {
+  dispatch: Dispatch,
+  getState: () => AppState,
+): Promise<void> => {
   const onPending = validateTokenOnPending();
 
   dispatch(onPending);
@@ -109,6 +113,6 @@ export const validateToken = () => async (
 
     dispatch(onFailure);
   }
-}
+};
 
 export {signOut};

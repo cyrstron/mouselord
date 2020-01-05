@@ -1,10 +1,10 @@
-import React, { useContext, ReactNode, useEffect, MouseEvent } from 'react';
+import React, {useContext, ReactNode, useEffect, MouseEvent} from 'react';
 import classnames from 'classnames/bind';
-import { PopupContext } from '../../app';
-import { createPortal } from 'react-dom';
+import {PopupContext} from '../../app';
+import {createPortal} from 'react-dom';
 
 import styles from './popup.scss';
-import { DangerIconBtn } from '@components/buttons';
+import {DangerIconBtn} from '@components/buttons';
 
 const cx = classnames.bind(styles);
 
@@ -19,7 +19,7 @@ const stopPropagationHandler = (e: MouseEvent) => {
   e.nativeEvent.stopImmediatePropagation();
   e.stopPropagation();
   e.preventDefault();
-}
+};
 
 const Popup = ({
   children,
@@ -36,7 +36,7 @@ const Popup = ({
 
     return () => {
       document.removeEventListener('click', closePopup);
-    }
+    };
   }, []);
 
   if (!popupContainer) return null;
@@ -49,7 +49,7 @@ const Popup = ({
       <div className={cx('wrapper')}>
         <h2 className={cx('title')}>
           {title}
-          <DangerIconBtn 
+          <DangerIconBtn
             onClick={closePopup}
             className={cx('close-btn')}
           >
@@ -60,6 +60,6 @@ const Popup = ({
       </div>
     </div>
   ), popupContainer);
-}
+};
 
-export {Popup}
+export {Popup};

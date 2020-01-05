@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
-import { NewGameStore } from '@scenes/games/stores/new-game-store';
-import { Borderline } from './components/borderline';
-import { PointSetter } from './components/point-setter';
+import React, {Component} from 'react';
+import {inject, observer} from 'mobx-react';
+import {NewGameStore} from '@scenes/games/stores/new-game-store';
+import {Borderline} from './components/borderline';
+import {PointSetter} from './components/point-setter';
 import {Polygon, Marker} from 'react-google-maps-ts';
 
 export interface EditableBorderlineProps {
@@ -34,7 +34,7 @@ class EditableBorderline extends Component<EditableBorderlineProps> {
     const {newGameStore} = this.props;
 
     const {
-      points, 
+      points,
       selectedPointIndex,
       isPending,
       invalidCells,
@@ -44,21 +44,21 @@ class EditableBorderline extends Component<EditableBorderlineProps> {
     return (
       <>
         {invalidCells.map((cell, index) => (
-          <Polygon 
+          <Polygon
             key={index}
             paths={cell.points}
             fillColor='#a33'
           />
         ))}
         {selfIntersections.map((point, index) => (
-          <Marker 
+          <Marker
             key={index}
             position={point}
             title={`Self intersection #${index}`}
           />
         ))}
         {!isPending && points.map((pointStore, index) => (
-          <PointSetter 
+          <PointSetter
             selectPoint={this.selectPoint}
             deletePoint={this.deletePoint}
             resetBorder={this.resetBorder}
@@ -70,7 +70,7 @@ class EditableBorderline extends Component<EditableBorderlineProps> {
         ))}
         <Borderline />
       </>
-    )
+    );
   }
 }
 

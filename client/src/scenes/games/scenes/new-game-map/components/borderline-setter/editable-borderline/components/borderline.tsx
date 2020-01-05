@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { Polyline } from 'react-google-maps-ts';
-import { inject, observer } from 'mobx-react';
-import { NewGameStore } from '@scenes/games/stores/new-game-store';
+import React, {Component} from 'react';
+import {Polyline} from 'react-google-maps-ts';
+import {inject, observer} from 'mobx-react';
+import {NewGameStore} from '@scenes/games/stores/new-game-store';
 
 export interface BorderlineProps {
-  newGameStore?: NewGameStore
+  newGameStore?: NewGameStore;
 }
 
 @inject('newGameStore')
@@ -41,6 +41,6 @@ class Borderline extends Component<BorderlineProps> {
       />
     );
   }
-};
+}
 
-export {Borderline}
+export {Borderline};

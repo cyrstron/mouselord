@@ -1,6 +1,6 @@
-import { InputStore } from "@stores/input-store";
-import { InputsStore, FormField } from "@stores/inputs-store";
-import { computed, observable, action } from "mobx";
+import {InputStore} from '@stores/input-store';
+import {InputsStore, FormField} from '@stores/inputs-store';
+import {computed, observable, action} from 'mobx';
 
 interface GeoPointStoreProps {
   lat: number;
@@ -8,26 +8,26 @@ interface GeoPointStoreProps {
 }
 
 export class GeoPointStore implements FormField {
-  @observable isPending: boolean = false;
+  @observable isPending = false;
 
   lat: InputStore<number>;
   lng: InputStore<number>;
 
   inputs: InputsStore;
 
-  get isValid() {
+  get isValid(): boolean {
     return this.inputs.isValid;
   }
 
-  async validate() {
+  async validate(): Promise<void> {
     await this.inputs.validate();
   }
 
-  reset() {
+  reset(): void {
     this.inputs.reset();
   }
 
-  validateLng = (value: number) => {
+  validateLng = (value: number): void | never => {
     if (isNaN(value)) throw new Error('Longitude is required field');
 
     if (value >= 180) throw new Error('Longitude should be less than 180 degrees');
@@ -35,7 +35,7 @@ export class GeoPointStore implements FormField {
     if (value < -180) throw new Error('Longitude shouldn\'t be less than -180 degrees');
   }
 
-  validateLat = (value: number) => {    
+  validateLat = (value: number): void | never => {
     if (isNaN(value)) throw new Error('Latitude is required field');
 
     if (value >= 180) throw new Error('Latitude shouldn\'t be more than 90 degrees');
@@ -44,10 +44,7 @@ export class GeoPointStore implements FormField {
   }
 
   @computed
-  get value(): {
-    lat: number;
-    lng: number;
-  } {
+  get value(): grider.GeoPoint {
     return {
       lat: +this.lat.value,
       lng: +this.lng.value,
@@ -55,7 +52,7 @@ export class GeoPointStore implements FormField {
   }
 
   @action
-  setPoint({lat, lng}: grider.GeoPoint) {
+  setPoint({lat, lng}: grider.GeoPoint): void {
     this.lat.setValue(lat);
     this.lng.setValue(lng);
   }
@@ -67,14 +64,14 @@ export class GeoPointStore implements FormField {
     this.lng = new InputStore<number>({
       value: lng,
       validate: this.validateLng,
-    });   
+    });
     this.lat = new InputStore({
       value: lat,
       validate: this.validateLat,
-    });     
+    });
 
     this.inputs = new InputsStore({
-      inputs: [this.lat, this.lng]
+      inputs: [this.lat, this.lng],
     });
   }
 }

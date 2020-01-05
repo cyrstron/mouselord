@@ -11,7 +11,6 @@ import App from './app';
 
 import './index.scss';
 
-
 const stores = {
   geolocationStore: new GeolocationStore(),
 };

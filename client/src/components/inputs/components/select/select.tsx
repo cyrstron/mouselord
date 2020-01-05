@@ -1,15 +1,15 @@
-import React, { Component, ChangeEvent, ReactNode, SelectHTMLAttributes } from 'react';
+import React, {Component, ChangeEvent, ReactNode, SelectHTMLAttributes} from 'react';
 import classNames from 'classnames/bind';
-import { InputStore } from '@stores/input-store';
-import { observer } from 'mobx-react';
-import { InputError } from '../input-error/input-error';
+import {InputStore} from '@stores/input-store';
+import {observer} from 'mobx-react';
+import {InputError} from '../input-error/input-error';
 
 import styles from './select.scss';
 
 const cx = classNames.bind(styles);
 
 export interface SelectProps extends Omit<
-  SelectHTMLAttributes<HTMLSelectElement>, 
+  SelectHTMLAttributes<HTMLSelectElement>,
   'value' | 'title'
 > {
   title: ReactNode;
@@ -44,16 +44,16 @@ export class Select extends Component<SelectProps, {}> {
       children,
       ...props
     } = this.props;
-  
+
     return (
-      <div      
+      <div
         className={cx('control', className, {
           'is-invalid': isValid === false,
           'is-valid': isValid && isTouched,
           'is-pending': isPending,
         })}
       >
-        <label 
+        <label
           htmlFor={id}
           className={cx('label')}
         >
@@ -70,11 +70,11 @@ export class Select extends Component<SelectProps, {}> {
             {children}
           </select>
         </span>
-        <InputError 
+        <InputError
           className={cx('error')}
-          error={error} 
+          error={error}
         />
       </div>
-    )
+    );
   }
 }

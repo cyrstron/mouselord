@@ -1,7 +1,7 @@
-import { observable, computed, action } from "mobx";
-import { GridParams, IndexatedFigure, GeoPolygon } from "@mouselord/grider";
-import { NewBorderStore } from "./new-border-store";
-import { GamePayload } from "@state/actions/games-requests/actions";
+import {observable, computed, action} from 'mobx';
+import {GridParams, IndexatedFigure} from '@mouselord/grider';
+import {NewBorderStore} from './new-border-store';
+import {GamePayload} from '@state/actions/games-requests/actions';
 
 export interface NewGameStoreProps {
   name?: string;
@@ -30,22 +30,22 @@ export class NewGameStore {
   }
 
   @action
-  setName(name: string) {
+  setName(name: string): void {
     this.name = name;
   }
 
   @action
-  setDesc(desc: string) {
+  setDesc(desc: string): void {
     this.desc = desc;
   }
 
   @action
-  setGridConfig(config: grider.GridConfig) {
+  setGridConfig(config: grider.GridConfig): void {
     this.gridConfig = config;
   }
 
   @action
-  reset() {
+  reset(): void {
     this.name = undefined;
     this.desc = undefined;
     this.gridConfig = undefined;
@@ -53,11 +53,11 @@ export class NewGameStore {
     this.newBorderStore.reset();
   }
 
-  setBorderFigure(borderFigure: IndexatedFigure) {
+  setBorderFigure(borderFigure: IndexatedFigure): void {
     this.borderFigure = borderFigure;
   }
 
-  resetBorderFigure() {
+  resetBorderFigure(): void {
     this.borderFigure = undefined;
   }
 

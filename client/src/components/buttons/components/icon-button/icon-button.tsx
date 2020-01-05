@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import React, {ButtonHTMLAttributes} from 'react';
 import classnames from 'classnames/bind';
 
 import styles from './icon-button.scss';

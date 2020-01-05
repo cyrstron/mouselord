@@ -1,2 +1,2 @@
-export { GeolocationStore } from './geolocation.store';
-export { GeolocationActions } from './geolocation.actions';
+export {GeolocationStore} from './geolocation.store';
+export {GeolocationActions} from './geolocation.actions';

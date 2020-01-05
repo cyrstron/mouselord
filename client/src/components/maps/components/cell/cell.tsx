@@ -1,7 +1,7 @@
 import React from 'react';
 import {SvgOverlay} from '../svg-overlay/svg-overlay';
 import {Polygon} from 'react-google-maps-ts';
-import { Cell } from '@mouselord/grider';
+import {Cell} from '@mouselord/grider';
 
 const CellPoly = ({
   onClick,
@@ -12,9 +12,9 @@ const CellPoly = ({
     easternPoint,
     westernPoint,
     southernPoint,
-}}: {
-  cell: Cell,
-  onClick: google.maps.MapMouseEventHandler
+  }}: {
+  cell: Cell;
+  onClick: google.maps.MapMouseEventHandler;
 }) => (
   <>
     <SvgOverlay
@@ -25,9 +25,9 @@ const CellPoly = ({
         south: northernPoint.lat,
       }}
     >
-      <text 
-        x={'50%'} 
-        y={'50%'} 
+      <text
+        x={'50%'}
+        y={'50%'}
         textAnchor='middle'
         fontSize='10px'
         fontWeight='bold'
@@ -37,8 +37,8 @@ const CellPoly = ({
         {'{'}i: {i}, j: {j}, k: {k}{'}'}
       </text>
     </SvgOverlay>
-    <Polygon 
-      paths={points} 
+    <Polygon
+      paths={points}
       fillColor='transparent'
       onClick={onClick}
     />
