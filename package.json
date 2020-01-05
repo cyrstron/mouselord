@@ -26,6 +26,7 @@
     "build:server": "cd ./server && npm run build",
     "build:grider": "cd ./grider && npm run build",
     "build:maps": "cd ./react-google-maps && npm run build",
+    "test:grider": "cd ./grider && npm run test",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
     "build": "npm run build:server && npm run build:client",
     "start": "cd ./server && npm start"
