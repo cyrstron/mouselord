@@ -4,6 +4,7 @@
   "description": "Geolocation Game",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npm run install:server && npm run install:client",
     "test": "echo \"Error: no test specified\" && exit 1",
     "install:client": "cd ./client && npm i",
     "install:server": "cd ./server && npm i",
@@ -17,11 +18,14 @@
     "links:server": "cd ./server && npm run links",
     "links": "npm run links:server && npm run links:client",
     "dev:init": "npm i && git submodule update --init && npm run link:dev && npm run links",
-    "postinstall": "npm run install:server && npm run install:client",
     "dev:client": "cd ./client && npm run dev",
     "dev:server": "cd ./server && npm run dev",
+    "dev:grider": "cd ./grider && npm run dev",
+    "dev:maps": "cd ./react-google-maps && npm run dev",
     "build:client": "cd ./client && npm run build",
     "build:server": "cd ./server && npm run build",
+    "build:grider": "cd ./grider && npm run build",
+    "build:maps": "cd ./react-google-maps && npm run build",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
     "build": "npm run build:server && npm run build:client",
     "start": "cd ./server && npm start"
