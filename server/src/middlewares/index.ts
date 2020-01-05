@@ -1,10 +1,10 @@
 import bodyParser from 'body-parser';
 import express from 'express';
 import path from 'path';
-import { RequestHandler, ErrorRequestHandler } from "express";
+import {RequestHandler, ErrorRequestHandler} from 'express';
 
-import { Controllers } from "../controllers";
-import { handleError } from './error-handler-middleware';
+import {Controllers} from '../controllers';
+import {handleError} from './error-handler-middleware';
 
 export interface Middlewares {
   verifyToken: RequestHandler;
@@ -14,12 +14,12 @@ export interface Middlewares {
 }
 
 export function createMiddlewares({
-  auth
-}: Controllers) {
+  auth,
+}: Controllers): Middlewares {
   return {
     parseJson: bodyParser.json(),
     staticServer: express.static(path.resolve(__dirname, '../../../static')),
     verifyToken: auth.verifyToken,
-    handleError
+    handleError,
   };
 }

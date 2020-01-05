@@ -1,8 +1,8 @@
-import { RequestHandler } from "express";
-import { RequestWithUser } from "./auth-controller";
-import { HttpError } from "../errors/http-error";
-import { GamesService } from "../services/games-service";
-import { Game } from "../models/games";
+import {RequestHandler} from 'express';
+import {RequestWithUser} from './auth-controller';
+import {HttpError} from '../errors/http-error';
+import {GamesService} from '../services/games-service';
+import {Game} from '../models/games';
 
 export class GamesController {
   constructor(
@@ -11,7 +11,7 @@ export class GamesController {
 
   getGameById: RequestHandler = async (req: RequestWithUser, res, next) => {
     const {
-      id
+      id,
     } = req.params;
 
     try {
@@ -40,15 +40,15 @@ export class GamesController {
     const gamePayload = req.body as Omit<Game, 'createdBy' | '_id'>;
 
     try {
-      const game = await this.games.create({
+      const result = await this.games.create({
         ...gamePayload,
         createdBy: {
-          _id: userId, 
+          _id: userId,
           name: userName,
-        }
+        },
       });
 
-      res.json({_id: game.insertedId.toHexString()});
+      res.json(result);
     } catch (err) {
       next(err);
     }

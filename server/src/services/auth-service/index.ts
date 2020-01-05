@@ -1,8 +1,8 @@
-import { UsersModel } from "../../models";
-import { Utils, HashedPassword } from "../../utils";
-import { createAuthStrategies } from "./strategies";
-import { AuthService } from "..";
-import { UserSchema } from "../../models/users";
+import {UsersModel} from '../../models';
+import {Utils, HashedPassword} from '../../utils';
+import {createAuthStrategies} from './strategies';
+import {AuthService} from '..';
+import {UserSchema} from '../../models/users';
 
 export interface NewDefaultUser {
   name: string;
@@ -45,7 +45,7 @@ export type UserPayload = Omit<UserSchema, keyof HashedPassword | '_id' | 'googl
 
 export type AuthStrategyType = 'default' | 'google' | 'facebook';
 
-export function createAuthService(users: UsersModel, utils: Utils) {
+export function createAuthService(users: UsersModel, utils: Utils): AuthService {
   const strategies = createAuthStrategies(users, utils);
 
   return new AuthService(users, strategies, utils);

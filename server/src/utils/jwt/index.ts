@@ -1,5 +1,5 @@
-import { FsUtils } from "../fs";
-import { JwtUtils, JwtSettings } from "./jwt";
+import {FsUtils} from '../fs';
+import {JwtUtils, JwtSettings} from './jwt';
 
 export type JwtOptions = Omit<JwtSettings, 'privateKey' | 'publicKey'> & {
   privateKeyPath: string;
@@ -19,7 +19,7 @@ export async function createJwtUtils(fs: FsUtils, {
   return new JwtUtils({
     privateKey,
     publicKey,
-    ...settings
+    ...settings,
   });
 }
 

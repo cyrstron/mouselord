@@ -1,10 +1,10 @@
-import axios, { AxiosRequestConfig, AxiosError } from 'axios';
-import { HttpError } from '../errors/http-error';
+import axios, {AxiosRequestConfig, AxiosError} from 'axios';
+import {HttpError} from '../errors/http-error';
 
 export class HttpUtils {
   http = axios;
 
-  async request<Response>(options: AxiosRequestConfig) {
+  async request<Response>(options: AxiosRequestConfig): Promise<Response> {
     try {
       const {data} = await axios.request<Response>(options);
 
@@ -17,50 +17,50 @@ export class HttpUtils {
   }
 
   get<Response>(
-    url: string, 
-    options: Omit<AxiosRequestConfig, 'method' | 'url'> = {}
-  ) {
+    url: string,
+    options: Omit<AxiosRequestConfig, 'method' | 'url'> = {},
+  ): Promise<Response> {
     return this.request<Response>({
       ...options,
       url,
-      method: 'GET'
-    })
+      method: 'GET',
+    });
   }
 
   delete<Response>(
-    url: string, 
-    options: Omit<AxiosRequestConfig, 'method' | 'url'> = {}
-  ) {
+    url: string,
+    options: Omit<AxiosRequestConfig, 'method' | 'url'> = {},
+  ): Promise<Response> {
     return this.request<Response>({
       ...options,
       url,
-      method: 'DELETE'
-    })
+      method: 'DELETE',
+    });
   }
 
   post<Response>(
-    url: string, 
+    url: string,
     body: any,
-    options: Omit<AxiosRequestConfig, 'method' | 'url' | 'data'> = {}
-  ) {
+    options: Omit<AxiosRequestConfig, 'method' | 'url' | 'data'> = {},
+  ): Promise<Response> {
     return this.request<Response>({
       ...options,
       url,
       data: body,
-      method: 'POST'
+      method: 'POST',
     });
   }
 
   put<Response>(
-    url: string, 
+    url: string,
     body: any,
-    options: Omit<AxiosRequestConfig, 'method' | 'url' | 'data'> = {}
-  ) {
+    options: Omit<AxiosRequestConfig, 'method' | 'url' | 'data'> = {},
+  ): Promise<Response> {
     return this.request<Response>({
       ...options,
       url,
       data: body,
-      method: 'PUT'
+      method: 'PUT',
     });
   }
 }

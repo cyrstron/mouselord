@@ -1,5 +1,0 @@
-node_modules/**/*
-public.key
-private.key
-client_secret.json
-.dist/**/*

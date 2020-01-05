@@ -1,8 +1,8 @@
-import { Db, Collection, ObjectID} from "mongodb";
-import { HashedPassword, GoogleAuthUtils, Utils } from "../../utils";
-import { emailRegex } from "./constants";
-import { FacebookAuthUtils } from "../../utils/facebook-auth";
-import { NewUserPayload } from "../../services/auth-service";
+import {Db, Collection, ObjectID} from 'mongodb';
+import {HashedPassword, GoogleAuthUtils, Utils} from '../../utils';
+import {emailRegex} from './constants';
+import {FacebookAuthUtils} from '../../utils/facebook-auth';
+import {NewUserPayload} from '../../services/auth-service';
 
 interface CommonUserSchema {
   name: string;
@@ -36,12 +36,14 @@ export class UsersModel {
     this.facebookAuth = facebookAuth;
     this.collection = db.collection<UserSchema>('users');
 
-    this.collection.createIndex({ email: 1 }, { sparse: true, unique: true });
-    this.collection.createIndex({ name: 1 }, { unique: true });
+    this.collection.createIndex({email: 1}, {sparse: true, unique: true});
+    this.collection.createIndex({name: 1}, {unique: true});
   }
 
-  async add(user: UserSchema) {
-    return this.collection.insertOne(user);
+  async add(user: UserSchema): Promise<{_id: string}> {
+    const {insertedId} = await this.collection.insertOne(user);
+
+    return {_id: insertedId.toHexString()};
   }
 
   async findOne(filter: {[key: string]: any}): Promise<UserJsonPayload | null> {
@@ -53,17 +55,17 @@ export class UsersModel {
 
     return {
       _id: _id.toHexString(),
-      ...user
-    }
+      ...user,
+    };
   }
 
-  async findByGoogleToken(googleToken: string) {
+  async findByGoogleToken(googleToken: string): Promise<UserJsonPayload | null> {
     const {email} = await this.googleAuth.decodeToken(googleToken);
 
     return this.findByEmail(email);
   }
-  
-  async findByFacebookToken(email: string, token: string) {
+
+  async findByFacebookToken(email: string, token: string): Promise<UserJsonPayload | null> {
     const isTokenValid = await this.facebookAuth.validateToken(token);
 
     if (!isTokenValid) return null;
@@ -92,7 +94,7 @@ export class UsersModel {
 
     const user = await this.findByEmail(email);
 
-    if (user) {      
+    if (user) {
       throw new Error('Email is already exists');
     }
 
@@ -102,7 +104,7 @@ export class UsersModel {
   async validateName(name: string): Promise<never | void> {
     if (name.length < 3) {
       throw new Error('Name length shouldn\'t be less than 3');
-    } 
+    }
 
     const user = await this.findByName(name);
 
@@ -112,7 +114,7 @@ export class UsersModel {
   }
 
   validateUser(
-    user: Omit<NewUserPayload, 'password'>
+    user: Omit<NewUserPayload, 'password'>,
   ): Promise<never | void[]> {
     const {name, ...userData} = user;
 

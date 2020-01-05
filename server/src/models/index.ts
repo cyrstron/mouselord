@@ -1,8 +1,8 @@
-import { Db } from "mongodb";
-import { UsersModel, createUsersModel } from "./users";
-import { RolesModel, createRolesModel } from "./roles";
-import { createGamesModel, GamesModel } from "./games";
-import { Utils } from "../utils";
+import {Db} from 'mongodb';
+import {UsersModel, createUsersModel} from './users';
+import {RolesModel, createRolesModel} from './roles';
+import {createGamesModel, GamesModel} from './games';
+import {Utils} from '../utils';
 
 export interface Models {
   users: UsersModel;
@@ -13,9 +13,9 @@ export interface Models {
 export function createModels(db: Db, utils: Utils): Models {
   return {
     users: createUsersModel(db, utils),
-    roles: createRolesModel(db, utils),
-    games: createGamesModel(db, utils)
-  }
+    roles: createRolesModel(db),
+    games: createGamesModel(db),
+  };
 }
 
 export {UsersModel};

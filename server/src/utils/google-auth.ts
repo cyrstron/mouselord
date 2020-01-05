@@ -1,4 +1,4 @@
-import { HttpUtils } from "./http";
+import {HttpUtils} from './http';
 
 export interface DecodedGoogleUser {
   iss: string;
@@ -6,12 +6,12 @@ export interface DecodedGoogleUser {
   aud: string;
   sub: string;
   email: string;
-  email_verified: boolean;
-  at_hash: string;
+  'email_verified': boolean;
+  'at_hash': string;
   name: string;
   picture: string;
-  given_name: string;
-  family_name: string;
+  'given_name': string;
+  'family_name': string;
   locale: string;
   iat: string;
   exp: string;
@@ -25,10 +25,10 @@ export class GoogleAuthUtils {
   oauthUrl = 'https://oauth2.googleapis.com';
 
   constructor(
-    private http: HttpUtils
+    private http: HttpUtils,
   ) {}
 
-  decodeToken(googleToken: string) {
+  decodeToken(googleToken: string): Promise<DecodedGoogleUser> {
     return this.http.get<DecodedGoogleUser>(`${this.oauthUrl}/tokeninfo?id_token=${googleToken}`);
   }
 }

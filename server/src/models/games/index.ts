@@ -1,8 +1,7 @@
-import { Db } from "mongodb";
-import { Utils } from "../../utils";
-import { GamesModel, GameSchema, GameJsonPayload, Game } from "./games";
+import {Db} from 'mongodb';
+import {GamesModel, GameSchema, GameJsonPayload, Game} from './games';
 
-export function createGamesModel(db: Db, _utils: Utils): GamesModel {
+export function createGamesModel(db: Db): GamesModel {
   return new GamesModel(db);
 }
 

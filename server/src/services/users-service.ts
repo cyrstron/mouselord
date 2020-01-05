@@ -1,16 +1,17 @@
-import { UsersModel } from "../models";
-import { UserPayload } from "./auth-service";
+import {UsersModel} from '../models';
+import {UserPayload} from './auth-service';
+import {UserJsonPayload} from 'src/models/users/users';
 
 export class UsersService {
   constructor(
-    private users: UsersModel
+    private users: UsersModel,
   ) {}
 
-  async getUserByGoogleToken(googleToken: string) {
+  getUserByGoogleToken(googleToken: string): Promise<UserJsonPayload | undefined> {
     return this.users.findByGoogleToken(googleToken);
   }
 
-  async getUserByFacebookAuth(email: string, token: string) {
+  getUserByFacebookAuth(email: string, token: string): Promise<UserJsonPayload | undefined> {
     return this.users.findByFacebookToken(email, token);
   }
 
@@ -30,7 +31,7 @@ export class UsersService {
       _id,
       email,
       name,
-      role     
+      role,
     };
   }
 }

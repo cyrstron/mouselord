@@ -3,17 +3,17 @@ import jwt from 'jsonwebtoken';
 export interface JwtSettings {
   privateKey: string;
   publicKey: string;
-  expiration: string,
-  encryption:  string,
-  issuer: string,
-  audience: string,
+  expiration: string;
+  encryption: string;
+  issuer: string;
+  audience: string;
 }
 
 export class JwtUtils {
   privateKey: string;
   publicKey: string;
   expiration: string;
-  encryption:  string;
+  encryption: string;
   issuer: string;
   audience: string;
 
@@ -34,21 +34,21 @@ export class JwtUtils {
   }
 
   sign(
-    payload: string | object | Buffer
+    payload: string | object | Buffer,
   ): Promise<string> {
     return new Promise((res, rej) => {
       jwt.sign(payload, this.privateKey, {
         expiresIn: this.expiration,
-        algorithm:  this.encryption,
+        algorithm: this.encryption,
         issuer: this.issuer,
-        audience: this.audience
+        audience: this.audience,
       }, (err, token) => {
         if (err) {
           rej(err);
         } else {
           res(token);
         }
-      })
+      });
     });
   }
 
@@ -65,7 +65,7 @@ export class JwtUtils {
         } else {
           res(payload as Payload);
         }
-      })
+      });
     });
   }
 }

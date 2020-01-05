@@ -1,5 +1,6 @@
-import { UsersModel } from "../../../models";
-import { FacebookAuthUtils } from "../../../utils/facebook-auth";
+import {UsersModel} from '../../../models';
+import {FacebookAuthUtils} from '../../../utils/facebook-auth';
+import {UserJsonPayload} from 'src/models/users/users';
 
 export class FacebookAuthStrategy {
   constructor(
@@ -8,12 +9,12 @@ export class FacebookAuthStrategy {
   ) {}
 
   async validate({
-      email, 
-      facebookToken
-    }: {
-      email: string,
-      facebookToken: string
-    }) {    
+    email,
+    facebookToken,
+  }: {
+      email: string;
+      facebookToken: string;
+    }): Promise<Pick<UserJsonPayload, '_id' | 'email' | 'name'> | never> {
     const user = await this.users.findByFacebookToken(email, facebookToken);
 
     if (!user) {
@@ -21,26 +22,30 @@ export class FacebookAuthStrategy {
     }
 
     const {
-      name, 
-      _id
+      name,
+      _id,
     } = user;
 
     return {
       email,
-      name, 
-      _id      
+      name,
+      _id,
     };
   }
 
   async create({
     name,
     email,
-    facebookToken
+    facebookToken,
   }: {
-    name: string,
-    email: string,
-    facebookToken: string,
-  }) {
+    name: string;
+    email: string;
+    facebookToken: string;
+  }): Promise<{
+    name: string;
+    email: string;
+    facebook: true;
+  } | never> {
     const isTokenValid = await this.facebookAuth.validateToken(facebookToken);
 
     if (!isTokenValid) throw new Error('Invalid creadentials');
@@ -49,6 +54,6 @@ export class FacebookAuthStrategy {
       name,
       email,
       facebook: true as true,
-    }
+    };
   }
 }

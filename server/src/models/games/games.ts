@@ -1,5 +1,5 @@
-import { Db, Collection, ObjectID, Cursor} from "mongodb";
-import { GridParams, GeoPolygon, Figure } from "@mouselord/grider";
+import {Db, Collection, ObjectID, Cursor} from 'mongodb';
+import {GridParams, GeoPolygon, Figure} from '@mouselord/grider';
 
 export interface GameSchema {
   name: string;
@@ -37,15 +37,17 @@ export class GamesModel {
     this.collection.createIndex({border: '2dsphere'});
   }
 
-  async add({border, ...game}: Omit<Game, '_id'>) {
+  async add({border, ...game}: Omit<Game, '_id'>): Promise<{_id: string}> {
     await this.validateGame({...game, border});
 
     const dbGame: GameSchema = {
       ...game,
-      border: this.toDbBorder(border)
-    }
+      border: this.toDbBorder(border),
+    };
 
-    return this.collection.insertOne(dbGame);
+    const {insertedId} = await this.collection.insertOne(dbGame);
+
+    return {_id: insertedId.toHexString()};
   }
 
   async findOne(filter: {[key: string]: any}): Promise<Game | null> {
@@ -58,8 +60,8 @@ export class GamesModel {
     return {
       _id: _id.toHexString(),
       border: this.toClientBorder(border),
-      ...game
-    }
+      ...game,
+    };
   }
 
   async find(filter?: {[key: string]: any}): Promise<Game[]> {
@@ -68,9 +70,9 @@ export class GamesModel {
     if (result === null) return null;
 
     const games = result.map(({_id, border, ...game}) => ({
-      _id: _id.toHexString(), 
+      _id: _id.toHexString(),
       border: this.toClientBorder(border),
-      ...game
+      ...game,
     }));
 
     return games.toArray();
@@ -113,15 +115,15 @@ export class GamesModel {
   }
 
   async validateBorder(
-    points: grider.GeoPoint[], 
-    gridConfig: grider.GridConfig
+    points: grider.GeoPoint[],
+    gridConfig: grider.GridConfig,
   ): Promise<void | never> {
     const gridParams = GridParams.fromConfig(gridConfig);
     const borderPoly = GeoPolygon.fromPlain(points);
 
     const {
       cells,
-      points: intersectionPoints
+      points: intersectionPoints,
     } = await Figure.validateShape(borderPoly, gridParams);
 
     if (intersectionPoints.length > 0) {
@@ -137,7 +139,7 @@ export class GamesModel {
     name,
     gridConfig,
     border,
-  }: Omit<Game, '_id'>) {
+  }: Omit<Game, '_id'>): Promise<void | never> {
     this.validateName(name);
     this.validateGridConfig(gridConfig);
 

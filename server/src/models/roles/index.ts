@@ -1,8 +1,7 @@
-import { RolesModel, RoleSchema } from "./roles";
-import { Db } from "mongodb";
-import { Utils } from "../../utils";
+import {RolesModel, RoleSchema} from './roles';
+import {Db} from 'mongodb';
 
-export function createRolesModel(db: Db, _utils: Utils): RolesModel {
+export function createRolesModel(db: Db): RolesModel {
   return new RolesModel(db);
 }
 

@@ -1,11 +1,11 @@
 import {Router} from 'express';
-import { GamesController } from '../../controllers/games-controller';
+import {GamesController} from '../../controllers/games-controller';
 
 export const createGamesRouter = (
-  Router: () => Router,
+  createRouter: () => Router,
   controller: GamesController,
 ): Router => {
-  const router = Router();
+  const router = createRouter();
 
   router.get('/:id', controller.getGameById);
 

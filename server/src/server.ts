@@ -1,7 +1,7 @@
 import {Application} from 'express';
 import path from 'path';
 import {Routers} from './routers';
-import { Middlewares } from './middlewares';
+import {Middlewares} from './middlewares';
 
 export interface ServerConfig {
   port: number;
@@ -17,7 +17,7 @@ export class Server {
       parseJson,
       handleError,
       staticServer,
-    }: Middlewares
+    }: Middlewares,
   ) {
     this.port = config.port;
 
@@ -30,17 +30,17 @@ export class Server {
     app.use('/static', staticServer);
 
     app.use('/auth', auth);
-    
+
     app.use('/api', api);
-    
-    app.get('*', (_req, res) => {      
+
+    app.get('*', (_req, res) => {
       res.sendFile(path.join(__dirname, '../../static/client/index.html'));
-    })
+    });
 
     app.use(handleError);
   }
 
-  public listen() {
+  public listen(): Promise<void> {
     return new Promise<void>((res, rej) => {
       this.app
         .listen(this.port, res)

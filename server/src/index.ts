@@ -5,22 +5,22 @@ dotenv.config({
   path: path.resolve(__dirname, '../../.env'),
 });
 
-import * as config from './configs'; 
+import * as config from './configs';
 
 import express, {Application, Router} from 'express';
 
-import { prepareApis, PreparedApis } from './loaders';
+import {prepareApis, PreparedApis} from './loaders';
 import {createUtils, Utils} from './utils';
-import { createModels, Models } from './models';
-import { createServices, Services } from './services';
+import {createModels, Models} from './models';
+import {createServices, Services} from './services';
 import {createControllers, Controllers} from './controllers';
-import { createMiddlewares, Middlewares } from './middlewares';
+import {createMiddlewares, Middlewares} from './middlewares';
 import {createRouters, Routers} from './routers';
 
 import {Server} from './server';
 
 
-async function createApp() {
+async function createApp(): Promise<void> {
   const utils: Utils = await createUtils(config.utilsConfig);
 
   const apis: PreparedApis = await prepareApis(config.loadersConfig);
@@ -32,7 +32,7 @@ async function createApp() {
 
   const app: Application = express();
   const server: Server = new Server(app, config.serverConfig, routers, middlewares);
-  
+
   await server.listen();
 }
 
@@ -42,4 +42,4 @@ createApp()
   })
   .catch((err) => {
     console.error(err);
-  })
+  });

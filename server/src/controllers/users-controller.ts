@@ -1,20 +1,20 @@
-import { RequestHandler, Request } from "express";
-import { RequestWithUser } from "./auth-controller";
-import { UsersService, } from "../services";
-import { HttpError } from "../errors/http-error";
+import {RequestHandler, Request} from 'express';
+import {RequestWithUser} from './auth-controller';
+import {UsersService} from '../services';
+import {HttpError} from '../errors/http-error';
 
 export class UsersController {
   constructor(
-    private users: UsersService
+    private users: UsersService,
   ) {}
 
   getUserByGoogleToken: RequestHandler = async (
-    req: Request, 
-    res, 
-    next
+    req: Request,
+    res,
+    next,
   ) => {
     const {googleToken} = req.query as {
-      googleToken?: string
+      googleToken?: string;
     };
 
     try {
@@ -27,9 +27,9 @@ export class UsersController {
   }
 
   getUserByFacebookAuth: RequestHandler = async (
-    req: Request, 
-    res, 
-    next
+    req: Request,
+    res,
+    next,
   ) => {
     const {facebookToken, email} = req.query as {
       facebookToken?: string;

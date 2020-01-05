@@ -27,7 +27,7 @@ export class EncryptUtils {
     encryption,
     iterations,
     encoding,
-  }: EncryptOptions) {    
+  }: EncryptOptions) {
     this.saltLength = saltLength;
     this.hashLength = hashLength;
     this.encryption = encryption;
@@ -35,7 +35,7 @@ export class EncryptUtils {
     this.encoding = encoding;
   }
 
-  private generateSalt(): string {    
+  private generateSalt(): string {
     return crypto.randomBytes(this.saltLength)
       .toString(this.encoding);
   }
@@ -47,8 +47,8 @@ export class EncryptUtils {
   ): Promise<string> {
     return new Promise((res, rej) => {
       crypto.pbkdf2(
-        password, 
-        salt, 
+        password,
+        salt,
         iterations,
         this.hashLength,
         this.encryption,
@@ -56,16 +56,16 @@ export class EncryptUtils {
           if (err) {
             rej(err);
           } else {
-            res(hash.toString(this.encoding))
+            res(hash.toString(this.encoding));
           }
-        }
+        },
       );
-    })
+    });
   }
 
   async encryptPassword(password: string): Promise<HashedPassword> {
     const salt = this.generateSalt();
-    
+
     const hash = await this.generateHash(password, salt);
 
     return {
@@ -78,7 +78,7 @@ export class EncryptUtils {
   async validatePassword(password: string, {
     hash,
     salt,
-    iterations
+    iterations,
   }: HashedPassword): Promise<boolean> {
     const testHash = await this.generateHash(password, salt, iterations);
 

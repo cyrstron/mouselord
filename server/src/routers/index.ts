@@ -1,8 +1,8 @@
 import {Router} from 'express';
 import {Controllers} from '../controllers';
-import { createAuthRouter } from './auth';
-import { createApiRouter } from './api';
-import { Middlewares } from '../middlewares';
+import {createAuthRouter} from './auth';
+import {createApiRouter} from './api';
+import {Middlewares} from '../middlewares';
 
 export interface Routers {
   auth: Router;

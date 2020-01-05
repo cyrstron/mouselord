@@ -1,7 +1,7 @@
-import { Services } from '../services';
-import { AuthController } from './auth-controller';
-import { UsersController } from './users-controller';
-import { GamesController } from './games-controller';
+import {Services} from '../services';
+import {AuthController} from './auth-controller';
+import {UsersController} from './users-controller';
+import {GamesController} from './games-controller';
 
 export interface Controllers {
   auth: AuthController;
@@ -10,7 +10,7 @@ export interface Controllers {
 }
 
 export const createControllers = ({
-  auth, 
+  auth,
   users,
   games,
 }: Services): Controllers => ({

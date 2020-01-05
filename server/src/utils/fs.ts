@@ -9,8 +9,8 @@ export class FsUtils {
         } else {
           res(data);
         }
-      })
-    })
+      });
+    });
   }
 
   async readFileAsUtf8(path: string): Promise<string> {

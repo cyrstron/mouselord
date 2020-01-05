@@ -1,4 +1,4 @@
-import path from "path";
+import path from 'path';
 
 export const utilsConfig = {
   encrypt: {
@@ -12,24 +12,24 @@ export const utilsConfig = {
     appId: process.env.FB_APP_ID,
     appSecret: process.env.FB_APP_SECRET,
   },
-  jwt: {    
-    privateKeyPath: path.resolve(__dirname, '../../private.key'),
-    publicKeyPath: path.resolve(__dirname, '../../public.key'),
+  jwt: {
+    privateKeyPath: path.resolve(__dirname, '../../../private.key'),
+    publicKeyPath: path.resolve(__dirname, '../../../public.key'),
     expiration: '24h',
-    encryption:  "RS256",
-    issuer:  'MiceLord',
-    audience:  'http://micelord.blah',
-  }
+    encryption: 'RS256',
+    issuer: 'MiceLord',
+    audience: 'http://micelord.blah',
+  },
 };
 
 export const loadersConfig = {
   mongo: {
     url: process.env.MONGODB_URL,
     dbName: 'micelord',
-    options: {    
+    options: {
       useNewUrlParser: true,
-      useUnifiedTopology: true 
-    }
+      useUnifiedTopology: true,
+    },
   },
 };
 

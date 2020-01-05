@@ -3,9 +3,9 @@ export class HttpError extends Error {
   statusText: string;
 
   constructor(
-    message: string, 
-    status: number, 
-    statusText: string
+    message: string,
+    status: number,
+    statusText: string,
   ) {
     super(message);
 

@@ -1,22 +1,22 @@
-import { HttpUtils } from "./http";
+import {HttpUtils} from './http';
 
 export interface FacebookValidationPayload {
   data: {
-    app_id: string;
+    'app_id': string;
     type: string;
     application: string;
-    data_access_expires_at: number;
-    expires_at: number;
-    is_valid: boolean;
+    'data_access_expires_at': number;
+    'expires_at': number;
+    'is_valid': boolean;
     scopes: string[];
-    user_id: string;
-  }
+    'user_id': string;
+  };
 }
 
 export interface FacebookAuthConfig {
   appId: string;
   appSecret: string;
-};
+}
 
 export class FacebookAuthUtils {
   authUrl = 'https://graph.facebook.com';
@@ -31,11 +31,19 @@ export class FacebookAuthUtils {
     this.appSecret = appSecret;
   }
 
-  async validateToken(token: string) {
+  async validateToken(token: string): Promise<boolean> {
     const {data} = await this.http.get<FacebookValidationPayload>(
-      `${this.authUrl}/debug_token?input_token=${token}&access_token=${this.appId}|${this.appSecret}`
+      `${
+        this.authUrl
+      }/debug_token?input_token=${
+        token
+      }&access_token=${
+        this.appId
+      }|${
+        this.appSecret
+      }`,
     );
 
-    return data.app_id = this.appId;
+    return data['app_id'] === this.appId;
   }
 }

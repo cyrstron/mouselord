@@ -1,13 +1,13 @@
 import {Router} from 'express';
-import { UsersController } from '../../controllers';
-import { Middlewares } from '../../middlewares';
+import {UsersController} from '../../controllers';
+import {Middlewares} from '../../middlewares';
 
 export const createUsersRouter = (
-  Router: () => Router,
+  createRouter: () => Router,
   controller: UsersController,
-  {verifyToken}: Middlewares
+  {verifyToken}: Middlewares,
 ): Router => {
-  const router = Router();
+  const router = createRouter();
 
   router.get('/by-google', controller.getUserByGoogleToken);
   router.get('/by-facebook', controller.getUserByFacebookAuth);

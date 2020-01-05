@@ -1,20 +1,20 @@
-import { prepareMongo } from "./mongo";
-import { Db, MongoClientOptions } from "mongodb";
+import {prepareMongo} from './mongo';
+import {Db, MongoClientOptions} from 'mongodb';
 
 export interface PreparedApis {
-  db: Db
-};
+  db: Db;
+}
 
 export interface LoadersConfig {
   mongo: {
     url: string;
     dbName: string;
     options: MongoClientOptions;
-  }
-};
+  };
+}
 
 export async function prepareApis({
-  mongo
+  mongo,
 }: LoadersConfig): Promise<PreparedApis> {
   const prepares = [
     prepareMongo(mongo.url, mongo.dbName, mongo.options),
@@ -23,6 +23,6 @@ export async function prepareApis({
   const [db] = await Promise.all(prepares);
 
   return {
-    db
+    db,
   };
 }
