@@ -1,9 +1,10 @@
 import {EncryptUtils, EncryptOptions, HashedPassword} from './crypto';
 import {FsUtils} from './fs';
-import {createJwtUtils, JwtOptions, JwtUtils} from './jwt';
+import {createJwtUtils, JwtUtils} from './jwt';
 import {HttpUtils} from './http';
 import {GoogleAuthUtils} from './google-auth';
 import {FacebookAuthUtils, FacebookAuthConfig} from './facebook-auth';
+import {JwtSettings} from './jwt/jwt';
 
 export interface Utils {
   encrypt: EncryptUtils;
@@ -16,14 +17,14 @@ export interface Utils {
 
 export interface UtilsConfig {
   encrypt: EncryptOptions;
-  jwt: JwtOptions;
+  jwt: JwtSettings;
   facebook: FacebookAuthConfig;
 }
 
 export async function createUtils(config: UtilsConfig): Promise<Utils> {
   const fs = new FsUtils();
 
-  const jwt = await createJwtUtils(fs, config.jwt);
+  const jwt = await createJwtUtils(config.jwt);
   const http = new HttpUtils();
 
   return {

@@ -97,7 +97,7 @@ class ExternalAuth extends Component<ExternalAuthProps> {
           />
           <FacebookLogin
             className={cx('auth-item')}
-            appId={process.env.FB_KEY as string}
+            appId={process.env.FB_APP_ID as string}
             onSuccess={this.onFacebookSuccess}
           />
         </div>
