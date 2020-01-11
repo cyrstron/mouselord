@@ -49,8 +49,5 @@
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react": "^7.17.0",
     "typescript": "^3.7.4"
-  },
-  "config": {
-    "unsafe-perm": true
   }
 }
