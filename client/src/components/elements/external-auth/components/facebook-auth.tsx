@@ -34,7 +34,12 @@ export class FacebookLogin extends Component<FacebookLoginProps> {
 
     await new Promise((res, rej) => {
       this.script = document.createElement('script');
-      this.script.src = `http://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=${appId}&autoLogAppEvents=1`;
+      this.script.src = `${
+        location.protocol
+      }//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=${
+        appId
+      }&autoLogAppEvents=1`;
+
       this.script.onerror = rej;
       this.script.onload = res;
 
