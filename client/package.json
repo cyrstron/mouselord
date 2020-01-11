@@ -50,7 +50,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-google-login": "^5.0.5",
-    "react-google-maps-ts": "0.0.13",
+    "react-google-maps-ts": "0.0.14",
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.1",
