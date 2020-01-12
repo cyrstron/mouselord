@@ -26,6 +26,15 @@ export class Server {
       api,
     } = routers;
 
+    app.use((_req, res, next) => {
+      res.setHeader('set-cookie', [
+        'same-site-cookie=bar; SameSite=Lax',
+        'cross-site-cookie=foo; SameSite=None; Secure',
+      ]);
+
+      next();
+    });
+
     app.use(parseJson);
     app.use('/static', staticServer);
 

@@ -78,8 +78,8 @@ export class FacebookLogin extends Component<FacebookLoginProps> {
       window.FB.logout();
     }
 
-    delete window.FB;
-    delete window.checkFacebookLogin;
+    // delete window.FB;
+    // delete window.checkFacebookLogin;
   }
 
   render() {
