@@ -8,5 +8,7 @@
     "javascriptreact",
     "typescript",
     "typescriptreact"
-  ]
+  ],
+  "eslint.autoFixOnSave": true,
+  "eslint.alwaysShowStatus": true
 }
