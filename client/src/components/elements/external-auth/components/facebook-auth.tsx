@@ -12,7 +12,7 @@ interface FacebookLoginProps {
   onSuccess: (
     authResponce: fb.AuthResponse,
     user: FacebookUser
-  ) => void;
+  ) => Promise<void>;
   onFailure?: (reason: { error: string }) => void;
 }
 
@@ -66,11 +66,7 @@ export class FacebookLogin extends Component<FacebookLoginProps> {
       window.FB.api('/me?fields=name,id,email', res);
     });
 
-    onSuccess(response.authResponse, user);
-  }
-
-  componentWillUnmount() {
-    this.script && this.script.remove();
+    await onSuccess(response.authResponse, user);
 
     if (!window.FB) return;
 
@@ -78,8 +74,10 @@ export class FacebookLogin extends Component<FacebookLoginProps> {
       window.FB.logout();
     }
 
-    // delete window.FB;
-    // delete window.checkFacebookLogin;
+    this.script && this.script.remove();
+
+    delete window.FB;
+    delete window.checkFacebookLogin;
   }
 
   render() {
