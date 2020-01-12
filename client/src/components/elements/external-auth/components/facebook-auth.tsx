@@ -46,8 +46,6 @@ export class FacebookLogin extends Component<FacebookLoginProps> {
       document.body.appendChild(this.script);
     });
 
-    this.checkStatus();
-
     window.checkFacebookLogin = this.checkStatus;
   }
 
