@@ -15,6 +15,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/body-parser": "^1.17.1",
+    "@types/dotenv": "^6.1.0",
+    "@types/express": "^4.16.1",
+    "@types/jsonwebtoken": "^8.3.3",
+    "@types/mongodb": "^3.3.1",
+    "@types/node": "^10.12.18",
     "@mouselord/grider": "git+https://github.com/cyrstron/grider.git",
     "axios": "^0.19.0",
     "body-parser": "^1.19.0",
@@ -24,12 +30,6 @@
     "mongodb": "^3.3.2"
   },
   "devDependencies": {
-    "@types/body-parser": "^1.17.1",
-    "@types/dotenv": "^6.1.0",
-    "@types/express": "^4.16.1",
-    "@types/jsonwebtoken": "^8.3.3",
-    "@types/mongodb": "^3.3.1",
-    "@types/node": "^10.12.18",
     "jest": "^24.0.0",
     "nodemon": "^1.18.9",
     "ts-node": "^8.0.2",
