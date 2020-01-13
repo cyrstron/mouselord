@@ -71,6 +71,14 @@ export class FacebookLogin extends Component<FacebookLoginProps> {
 
     await onSuccess(response.authResponse, user);
 
+    this.unmountFB();
+  }
+
+  componentWillUnmount() {
+    this.unmountFB();
+  }
+
+  unmountFB() {
     if (!window.FB) return;
 
     if (this.isConnected) {
@@ -78,10 +86,9 @@ export class FacebookLogin extends Component<FacebookLoginProps> {
     }
 
     this.script && this.script.remove();
-  }
 
-  componentWillUnmount() {
     delete window.checkFacebookLogin;
+    delete window.FB;
   }
 
   render() {
