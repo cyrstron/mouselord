@@ -33,6 +33,13 @@ export class FacebookLogin extends Component<FacebookLoginProps> {
     } = this.props;
 
     await new Promise((res, rej) => {
+      window.checkFacebookLogin = this.checkStatus;
+
+      if (window.FB) {
+        res();
+
+        return;
+      }
       this.script = document.createElement('script');
       this.script.src = `${
         location.protocol
@@ -45,8 +52,6 @@ export class FacebookLogin extends Component<FacebookLoginProps> {
 
       document.body.appendChild(this.script);
     });
-
-    window.checkFacebookLogin = this.checkStatus;
   }
 
   checkStatus = async () => {
@@ -73,8 +78,9 @@ export class FacebookLogin extends Component<FacebookLoginProps> {
     }
 
     this.script && this.script.remove();
+  }
 
-    delete window.FB;
+  componentWillUnmount() {
     delete window.checkFacebookLogin;
   }
 
